@@ -1,0 +1,411 @@
+.services-page {
+    width: 100%;
+    min-height: 100vh;
+    padding-bottom: 80px;
+    position: relative;
+    overflow-x: hidden;
+    color: #312f4e;
+}
+
+/* Background Image Layer (Fixed to Viewport) */
+.services-page::after {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-image: url("../assets/img/PlanoGP.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: -2;
+}
+
+/* Background Overlay Layer (Fixed to Viewport) */
+.services-page::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(242, 243, 247, 0.97);
+    /* Extremely subtle/faint */
+    z-index: -1;
+    pointer-events: none;
+}
+
+/* Hero - Reduced height and used softer Landing-like styling if possible, though staying robust as page header */
+.services-hero {
+    background-color: #312f4e;
+    color: white;
+    padding: 10px 20px 30px 20px;
+    /* Reduced from 100px */
+    text-align: center;
+    margin: 5px 5px 30px 5px;
+    border-radius: 10px;
+    /* Slightly clearer radius */
+}
+
+.services-hero__content h1 {
+    font-family: "Plus Jakarta Sans", sans-serif;
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    margin-bottom: 10px;
+    margin-top: 15px !important;
+    font-weight: 600;
+    /* Matched to landing titles usually being 600 */
+}
+
+.services-hero__content p {
+    font-family: "Plus Jakarta Sans", sans-serif;
+    font-size: clamp(0.95rem, 1.8vw, 1.1rem);
+    line-height: 1.6;
+    opacity: 0.9;
+    max-width: 700px;
+    margin: 0 auto;
+    font-weight: 400;
+}
+
+.services-list {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 15px;
+    /* Tighter padding */
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    /* Reduced gap from 20px */
+}
+
+.service-card-item {
+    background: white;
+    border-radius: 12px;
+    /* Slightly less rounded to reduce chunky feel */
+    box-shadow: 2px 2px 10px 2px rgba(107, 107, 107, 0.05);
+    /* Matched to Landing shadow style */
+    border: none;
+    /* Removing border to match Landing clean style */
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.service-card-item:hover {
+    box-shadow: 2px 2px 15px 4px rgba(107, 107, 107, 0.1);
+    transform: translateY(-2px);
+}
+
+.service-card-item.expanded {
+    /* border: 1px solid #312f4e;  Optional: remove border if it feels too technical */
+    box-shadow: 2px 4px 20px 4px rgba(49, 47, 78, 0.12);
+}
+
+.service-card-header {
+    padding: 20px 25px;
+    /* Reduced padding */
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    cursor: pointer;
+    background: white;
+    position: relative;
+    z-index: 2;
+}
+
+/* IconWrapper */
+.service-icon-wrapper {
+    width: 50px;
+    /* Smaller icon wrapper */
+    height: 50px;
+    background: #f3f3f8;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #312f4e;
+    flex-shrink: 0;
+    transition: background 0.3s ease, color 0.3s ease;
+}
+
+.service-card-item.expanded .service-icon-wrapper {
+    background: #312f4e;
+    color: white;
+}
+
+.service-icon-wrapper svg {
+    font-size: 1.6rem;
+    /* Smaller icon */
+}
+
+/* Info Preview */
+.service-info-preview {
+    flex-grow: 1;
+}
+
+.service-package-label {
+    display: block;
+    font-family: "Plus Jakarta Sans", sans-serif;
+    font-size: 0.8rem;
+    color: #92929d;
+    /* Muted color */
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.service-info-preview h2 {
+    font-family: "Plus Jakarta Sans", sans-serif;
+    font-size: 1.2rem;
+    color: #312f4e;
+    margin: 0 0 10px 0;
+    /* Increased from 5px to 10px */
+    font-weight: 700;
+}
+
+.service-target-preview {
+    font-family: "Plus Jakarta Sans", sans-serif;
+    color: #555562;
+    font-size: 0.95rem;
+    line-height: 1.4;
+    margin: 0;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    font-weight: 400;
+}
+
+/* Toggle Icon */
+.service-toggle-icon {
+    font-size: 1.8rem;
+    color: #312f4e;
+    font-weight: 300;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s ease;
+}
+
+.service-card-item.expanded .service-toggle-icon {
+    transform: rotate(180deg);
+}
+
+/* Body (Accordion) */
+.service-card-body {
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease-out, opacity 0.3s ease-out;
+    background: #fafafc;
+}
+
+.service-card-item.expanded .service-card-body {
+    max-height: 4000px;
+    /* Increased significantly to accommodate all content */
+    opacity: 1;
+}
+
+.service-body-content {
+    padding: 10px 25px 25px 95px;
+    /* Indent to align with text */
+}
+
+.detail-section {
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #f0f0f5;
+}
+
+.detail-section:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.detail-section h3 {
+    font-family: "Plus Jakarta Sans", sans-serif;
+    font-size: 1.1rem;
+    color: #312f4e;
+    margin-bottom: 10px;
+    font-weight: 600;
+    /* text-transform: uppercase; Removed as requested */
+    letter-spacing: 0;
+}
+
+.detail-section p {
+    font-family: "Plus Jakarta Sans", sans-serif;
+    color: #555562;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* New List Styles */
+.service-list-items {
+    margin: 0;
+    padding-left: 20px;
+    font-family: "Plus Jakarta Sans", sans-serif;
+    color: #555562;
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+.service-list-items li {
+    margin-bottom: 6px;
+}
+
+.service-list-items strong {
+    color: #312f4e;
+    font-weight: 700;
+}
+
+/* Price Details */
+.price-section .price-tag {
+    font-size: 1.1rem;
+    font-weight: 400;
+    /* Changed from 700 to normal, specific bolding will be in data */
+    color: #312f4e;
+}
+
+.price-details-list {
+    margin: 5px 0 0 0;
+    padding-left: 0;
+    list-style: none;
+    font-family: "Plus Jakarta Sans", sans-serif;
+    color: #555562;
+    font-size: 0.9rem;
+}
+
+.price-details-list li {
+    margin-bottom: 3px;
+    position: relative;
+    padding-left: 15px;
+}
+
+.price-details-list li:before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    color: #312f4e;
+}
+
+/* Notes & Disclaimer */
+.service-notes {
+    margin-bottom: 25px;
+    padding-top: 15px;
+    /* border-top: 1px solid #ececf3; Removed to avoid double line with previous section border */
+}
+
+.note-item,
+.disclaimer-item {
+    font-family: "Plus Jakarta Sans", sans-serif;
+    font-size: 0.85rem;
+    color: #706f7b;
+    line-height: 1.5;
+    margin-bottom: 8px;
+    font-style: italic;
+}
+
+.note-item strong,
+.disclaimer-item strong {
+    color: #312f4e;
+    font-weight: 600;
+    font-style: normal;
+}
+
+
+.service-actions {
+    margin-top: 25px;
+}
+
+/* Changed to match Landing Page Button Style EXACTLY */
+.cta-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 30px;
+    height: 40px;
+    background: none;
+    border: 3.5px solid #312f4e;
+    color: #312f4e;
+    text-decoration: none;
+    border-radius: 100px;
+    font-family: "Plus Jakarta Sans", sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    transition: all 0.3s ease-in-out;
+    cursor: pointer;
+}
+
+.cta-button:hover {
+    background-color: #312f4e;
+    color: white;
+    font-weight: 450;
+    box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.223);
+    transform: none;
+    /* Removed the lift to match landing page hover EXACTLY */
+}
+
+/* CTA Footer */
+.services-cta {
+    text-align: center;
+    padding: 60px 20px;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.services-cta h2 {
+    font-family: "Plus Jakarta Sans", sans-serif;
+    font-size: 1.6rem;
+    color: #312f4e;
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+.services-cta p {
+    font-family: "Plus Jakarta Sans", sans-serif;
+    color: #605e6b;
+    /* Muted text */
+    margin-bottom: 25px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .service-card-header {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 20px;
+        gap: 15px;
+    }
+
+    .service-toggle-icon {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+    }
+
+    .service-body-content {
+        padding: 15px 20px 25px 20px;
+        /* Remove indent on mobile */
+    }
+
+    .service-icon-wrapper {
+        width: 45px;
+        height: 45px;
+        font-size: 1.4rem;
+    }
+
+    .service-card-item.expanded .service-card-body {
+        max-height: 4000px;
+        /* Allow more height on mobile */
+    }
+
+    .service-target-preview {
+        display: block;
+        -webkit-line-clamp: unset;
+        line-clamp: unset;
+    }
+}

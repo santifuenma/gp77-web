@@ -1,0 +1,190 @@
+.under-construction {
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #f2f2f2;
+    position: relative;
+    overflow: hidden;
+    color: #312f4e;
+    font-family: "Plus Jakarta Sans", sans-serif;
+    text-align: center;
+}
+
+.tape-container {
+    position: absolute;
+    width: 120%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0;
+    gap: 35vh;
+    /* Separación dinámica */
+}
+
+.tape {
+    background: repeating-linear-gradient(45deg,
+            #facc15,
+            #facc15 20px,
+            #1f1f1f 20px,
+            #1f1f1f 40px);
+    width: 120%;
+    height: 60px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: moveTape 2s linear infinite;
+    position: relative;
+    left: -10%;
+}
+
+.tape.top {
+    transform: rotate(5deg);
+}
+
+.tape.bottom {
+    transform: rotate(-5deg);
+    animation-direction: reverse;
+}
+
+@keyframes moveTape {
+    0% {
+        background-position: 0 0;
+    }
+
+    100% {
+        background-position: 56.5px 0;
+    }
+}
+
+.content-box {
+    z-index: 10;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 3rem;
+    border-radius: 20px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+    max-width: 90%;
+    width: 600px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    margin: 0 20px;
+}
+
+.construction-icon {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+    animation: bounce 2s infinite ease-in-out;
+}
+
+.under-construction h1 {
+    /* Coherencia con Landing.css */
+    font-family: "Plus Jakarta Sans", sans-serif;
+    font-size: clamp(1.4rem, 3.8vw, 2.8rem);
+    margin: 0 0 1rem 0;
+    color: #312f4e;
+    line-height: 1.2;
+}
+
+.under-construction p {
+    font-size: clamp(0.9rem, 1.65vw, 1.1rem);
+    /* Coherencia con Landing.css */
+    line-height: 1.6;
+    color: #605e6b;
+    /* Color similar al lead de formulario */
+    margin-bottom: 2rem;
+}
+
+/* Estilos copiados y adaptados de Landing.css .boton-contacto */
+.home-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    margin: 20px auto 0 auto;
+    padding: 0;
+    /* Usando medidas relativas para consistencia */
+    width: 11vw;
+    min-width: 180px;
+    height: 2.9vw;
+    min-height: 45px;
+    /* Un poco más alto para fácil click */
+
+    font-family: "Plus Jakarta Sans", sans-serif;
+    color: #312f4e;
+    font-size: clamp(0.9rem, 1.4vw, 1.02rem);
+    font-weight: 600;
+    background: none;
+    border: 3.5px solid #312f4e;
+    border-radius: 100px;
+    cursor: pointer;
+    transition: all 0.4s ease-in-out;
+}
+
+.home-btn:hover {
+    background-color: #312f4e;
+    color: rgba(255, 255, 255);
+    font-weight: 450;
+    box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.223);
+    transform: none;
+}
+
+@keyframes bounce {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-15px);
+    }
+}
+
+/* === MEDIA QUERIES === */
+@media (max-width: 790px) {
+    .content-box {
+        padding: 2rem 1.5rem;
+        width: 85%;
+    }
+
+    .under-construction h1 {
+        /* Ajuste específico para móvil como en Landing */
+        font-size: clamp(1.7rem, 4.7vw, 2.2rem);
+    }
+
+    .tape {
+        height: 40px;
+        background: repeating-linear-gradient(45deg,
+                #facc15,
+                #facc15 15px,
+                #1f1f1f 15px,
+                #1f1f1f 30px);
+    }
+
+    .tape-container {
+        gap: 40vh;
+        /* Más espacio en vertical en móviles */
+    }
+
+    .home-btn {
+        width: 60%;
+        max-width: 250px;
+        border-width: 4px;
+    }
+}
+
+@media (max-width: 415px) {
+    .under-construction h1 {
+        font-size: clamp(1.5rem, 5vw, 2rem);
+    }
+
+    .content-box {
+        padding: 1.5rem;
+    }
+}

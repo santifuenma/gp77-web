@@ -1,0 +1,233 @@
+/* === BACKGROUND WRAPPER === */
+.formulario-page-bg {
+    width: 100%;
+    min-height: 100vh;
+    position: relative;
+    background-image: url("../../assets/img/PlanoGP.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+/* SUBTLE OVERLAY */
+.formulario-page-bg::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(242, 243, 247, 0.97);
+    /* Very subtle overlay */
+    z-index: 0;
+    pointer-events: none;
+}
+
+.formulario-page-bg>* {
+    position: relative;
+    z-index: 1;
+}
+
+.contact {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    max-width: 1200px;
+    min-height: 90vh;
+    /* Keeps the footer push on Desktop */
+    padding: 25px 15px 0px 15px;
+    /* User preferred padding */
+    margin: 10px auto;
+}
+
+.contact__card {
+    background-color: #ffffff;
+    width: 95%;
+    max-width: 550px;
+    /* User preferred width */
+    padding: 10px 25px 45px 25px;
+    /* User preferred padding */
+    border-radius: 20px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.contact__title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #312f4e;
+    margin-bottom: 10px;
+    font-family: "Plus Jakarta Sans", sans-serif;
+}
+
+.contact__lead {
+    font-size: 0.95rem;
+    color: #606060;
+    margin-bottom: 20px;
+    max-width: 95%;
+    line-height: 1.4;
+}
+
+.contact__form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.contact__input,
+.contact__textarea {
+    width: 100%;
+    padding: 10px 15px;
+    border-radius: 100px;
+    /* PILL SHAPE */
+    border: 3px solid #312f4e58;
+    /* THICK BORDER */
+    background-color: #f7f7fb;
+    font-size: 0.9rem;
+    font-family: "Plus Jakarta Sans", sans-serif;
+    outline: none;
+    transition: all 0.3s ease;
+    color: #312f4e;
+    box-sizing: border-box;
+    height: 40px;
+}
+
+.contact__input:focus,
+.contact__textarea:focus {
+    border-color: #312f4e;
+    background-color: #fff;
+    box-shadow: 0 4px 10px rgba(49, 47, 78, 0.1);
+}
+
+.contact__input::placeholder,
+.contact__textarea::placeholder {
+    color: #a7a7b1;
+}
+
+.contact__textarea {
+    border-radius: 20px;
+    resize: none;
+    padding-top: 12px;
+    height: auto;
+    min-height: 100px;
+}
+
+.contact__selectores {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.contact__selectWrap {
+    flex: 1 1 48%;
+    /* Side by side on desktop and mobile by default now */
+    min-width: 45%;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+}
+
+.contact__submit {
+    width: 150px;
+    border-radius: 100px;
+    border: 0;
+    background-color: #312f4e;
+    font-size: 0.9rem;
+    color: #ffffff;
+    font-weight: 600;
+    font-family: "Plus Jakarta Sans", sans-serif;
+    cursor: pointer;
+    transition: filter .2s ease, box-shadow .2s ease;
+    box-shadow: inset 0 0 0 0 rgba(255, 255, 255, .25);
+    align-self: center;
+    border: 3.5px solid #312f4e;
+    padding: 10px 20px;
+    margin-top: 10px;
+    height: 45px;
+}
+
+.contact__submit:hover {
+    filter: brightness(.97);
+    box-shadow: inset 0 0 0 3px rgba(255, 255, 255, .22);
+}
+
+.contact__error {
+    margin: 5px 0;
+    color: #b42323;
+    background: #ffecec;
+    border: 1px solid #ffd2d2;
+    border-radius: 10px;
+    padding: 8px 10px;
+    font-size: .8rem;
+    text-align: center;
+}
+
+.contact__ok {
+    margin: 5px 0;
+    color: #146c43;
+    background: #e8f6ef;
+    border: 1px solid #c9eadc;
+    border-radius: 10px;
+    padding: 8px 10px;
+    font-size: .8rem;
+    text-align: center;
+}
+
+/* Accesibilidad */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+}
+
+/* 🛡️ Honeypot oculto */
+.hp-field {
+    position: absolute !important;
+    left: -10000px !important;
+    height: 0 !important;
+    width: 0 !important;
+    opacity: 0 !important;
+    pointer-events: none;
+}
+
+@media (max-width: 600px) {
+    .contact {
+        padding: 20px 20px 20px 20px;
+        /* Safe padding for navbar */
+        min-height: auto;
+        margin: 0 auto;
+        align-items: flex-start;
+    }
+
+    .contact__card {
+        width: 100%;
+        /* COPYING DESKTOP PADDING ON MOBILE AS REQUESTED */
+        padding: 10px 25px 45px 25px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+        border-radius: 20px;
+        max-width: 100%;
+        margin-top: 10px;
+    }
+
+    .contact__lead {
+        margin-bottom: 20px;
+    }
+
+    .contact__title {
+        font-size: 1.8rem;
+    }
+
+    /* REMOVED STACKED SELECTORS RULE - they will now inherit flex 48% */
+}

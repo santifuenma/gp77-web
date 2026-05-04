@@ -1,0 +1,501 @@
+/* === HERO / HOOK === */
+.landing-hook {
+    height: 92vh;
+    position: relative;
+    margin: 0;
+    justify-content: center;
+    width: 100%;
+    overflow: hidden;
+}
+
+
+/* === TÍTULO sobre la imagen === */
+.landing-title {
+    max-width: 800px;
+    max-height: 179px;
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    z-index: 10000;
+    top: 32%;
+    left: 70px;
+}
+
+.landing-title h1 {
+    margin: 0;
+    padding: 0;
+    font-family: "Plus Jakarta Sans", sans-serif;
+    color: #312f4e;
+    font-size: clamp(1.4rem, 3.8vw, 2.8rem);
+}
+
+/* === BOTÓN === */
+.landing-hook .boton-contacto {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+    text-decoration: none;
+    /* display: inline-block; Eliminado para que display: flex funcione */
+
+    margin: 25px 0 0 0;
+    padding: 0;
+    width: 37%;
+    min-width: 200px;
+    max-width: 280px;
+    height: 2.9vw;
+    max-height: 40px;
+    min-height: 38px;
+
+    font-family: "Plus Jakarta Sans", sans-serif;
+    color: #312f4e;
+    font-size: clamp(0.9rem, 1.4vw, 1.09rem);
+    font-weight: 600;
+    background: none;
+    border: 4.5px solid #312f4e;
+    border-radius: 100px;
+    cursor: pointer;
+    transition: all 0.4s ease-in-out;
+}
+
+.boton-contacto:hover {
+    background-color: #312f4e;
+    color: rgba(255, 255, 255);
+    font-weight: 450;
+    box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.223);
+}
+
+/* === SWIPER === */
+.landing-swiper {
+    max-width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+/* === IMÁGENES SWIPER === */
+.Slide1 {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+.Slide1Mobile {
+    display: none;
+}
+
+.Slide2 {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+.Slide2Mobile {
+    display: none;
+}
+
+.Slide3 {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+.Slide3Mobile {
+    display: none;
+}
+
+
+
+
+/* === FLECHAS Y PAGINACIÓN === */
+.swiper-button-prev,
+.swiper-button-next {
+    color: #312f4e !important;
+    scale: 0.5;
+    margin: 10px;
+}
+
+.swiper-pagination-bullet {
+    background-color: #616060 !important;
+}
+
+.swiper-pagination-bullet-active {
+    background-color: #312f4e !important;
+    opacity: 1;
+}
+
+/* === SECCIÓN SOMOS GP === */
+.landing-SomosGP {
+    width: 100%;
+    height: auto;
+    background-color: #f2f2f2;
+}
+
+/* === CONTENEDOR CONOCE GP === */
+.landing-conoceGP {
+    width: 100%;
+    height: 100%;
+    display: flex;
+}
+
+.landing-conoceGP u {
+    text-underline-offset: 6px;
+    text-decoration-thickness: 2px;
+}
+
+/* === BLOQUE TEXTO CONÓCENOS === */
+.landing-conocenos {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    background-color: rgb(251, 251, 251);
+    width: 70%;
+    margin: 20px 0 20px 15px;
+    border-radius: 10px;
+    box-shadow: 2px 2px 10px 2px rgba(107, 107, 107, 0.071);
+    max-height: 320px;
+}
+
+.landing-conocenos h2 {
+    margin: 35px 0 10px 19px;
+    padding: 0 0 0 35px;
+    font-family: "Plus Jakarta Sans", sans-serif;
+    font-size: clamp(1.2rem, 3vw, 2rem);
+    color: #312f4e;
+    font-weight: 600;
+}
+
+.landing-conocenosP1 {
+    margin: 20px 50px 0 18px;
+    padding: 0;
+    font-family: "Plus Jakarta Sans", sans-serif;
+    font-size: clamp(0.9rem, 1.65vw, 1.1rem);
+    color: #38364db8;
+    font-weight: 400;
+    padding: 0 0 0 35px;
+    line-height: 1.8;
+    text-align: justify;
+}
+
+.landing-conocenosP2 {
+
+    margin: 20px 50px 0 18px;
+    padding: 0;
+    font-family: "Plus Jakarta Sans", sans-serif;
+    font-size: clamp(0.9rem, 1.65vw, 1.1rem);
+    color: #38364db8;
+    font-weight: 400;
+    padding: 0 0 0 35px;
+    line-height: 1.8;
+    text-align: justify;
+}
+
+/* === BOTÓN === */
+/* === BOTÓN === */
+.boton-conocemas {
+
+    margin: 20px 50px 10px 50px;
+    padding: 0;
+    width: 11vw;
+    min-width: 180px;
+    height: 2.9vw;
+    min-height: 35px;
+    max-height: 32px;
+
+    font-family: "Plus Jakarta Sans", sans-serif;
+    color: #312f4e;
+    font-size: clamp(0.9rem, 1.4vw, 1.02rem);
+    font-weight: 600;
+    background: none;
+    border: 3.5px solid #312f4e;
+    border-radius: 100px;
+    cursor: pointer;
+    transition: all 0.4s ease-in-out;
+
+    /* Added for Link compatibility */
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+}
+
+.boton-conocemas:hover {
+    background-color: #312f4e;
+    color: rgba(255, 255, 255);
+    font-weight: 450;
+    box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.223);
+}
+
+/* === BLOQUE IMAGEN CONÓCENOS === */
+.Landing-ConocenosImg {
+    width: 50%;
+    height: 340px;
+    overflow: hidden;
+    margin: 20px 15px 20px 10px;
+    border-radius: 10px;
+    box-shadow: 2px 2px 10px 2px rgba(107, 107, 107, 0.052);
+}
+
+.Landing-ConocenosImg img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 20%;
+}
+
+.Landing-ConocenosImg-mobile {
+    display: none;
+}
+
+/* === MEDIA QUERIES === */
+@media (max-width: 1650px) {
+
+    .landing-conocenos {
+        height: 350px;
+        max-height: 350px;
+    }
+
+
+    .Landing-ConocenosImg {
+        height: 350px;
+    }
+}
+
+@media (max-width: 1227px) {
+
+    .landing-conocenos {
+        height: 365px;
+        max-height: 350px;
+    }
+
+
+    .Landing-ConocenosImg {
+        height: 350px;
+    }
+}
+
+
+
+
+
+@media (max-width: 790px) {
+    .landing-hook .boton-contacto {
+        margin-top: 15px;
+        border: 4px solid;
+        max-width: 250px;
+    }
+
+    .landing-hook .boton-contacto:hover {
+        border-color: #312f4e;
+    }
+
+    .swiper-button-prev,
+    .swiper-button-next {
+        color: #312f4e !important;
+        scale: 0.4;
+    }
+
+    .swiper-pagination-bullet {
+        background-color: #616060 !important;
+        scale: 0.7;
+    }
+
+    .swiper-pagination-bullet-active {
+        background-color: #312f4e !important;
+        opacity: 1;
+        scale: 0.7;
+    }
+
+    .landing-title {
+        align-items: center;
+        width: 100%;
+        height: auto;
+        max-width: 100%;
+        left: 0;
+        margin-top: -160px;
+    }
+
+    .landing-hook {
+        display: flex;
+        align-items: center;
+        height: 200px;
+    }
+
+    .landing-title h1 {
+        text-align: center;
+        line-height: 1.4;
+        margin: 0;
+        padding: 0;
+        font-family: "Plus Jakarta Sans", sans-serif;
+        color: #312f4e;
+        font-size: clamp(1.7rem, 4.7vw, 2.9rem);
+    }
+
+    .swiper-button-prev,
+    .swiper-button-next {
+        color: #312f4e !important;
+        scale: 0.4;
+    }
+
+    .Slide1 {
+        display: none;
+    }
+
+    .landing-hook {
+        height: 670px;
+    }
+
+    .landing-swiper {
+        height: 100%;
+        width: 100%;
+    }
+
+    .landing-swiper img {
+        min-width: 0px;
+    }
+
+    .Slide1Mobile {
+        display: block;
+        object-fit: cover;
+        height: 100%;
+        width: 100%;
+        object-position: center center;
+    }
+
+    .Slide2 {
+        display: none;
+    }
+
+    .Slide2Mobile {
+        display: block;
+        object-fit: cover;
+        height: 100%;
+        width: 100%;
+        object-position: 70%;
+    }
+
+    .Slide3 {
+        display: none;
+    }
+
+    .Slide3Mobile {
+        display: block;
+        object-fit: cover;
+        height: 100%;
+        width: 100%;
+        object-position: 70%;
+    }
+
+
+    .landing-conocenos {
+        width: 100%;
+        height: auto;
+        /* Allow content to dictate height */
+        min-height: 600px;
+        align-items: center;
+        justify-content: center;
+        margin: 15px 15px 15px 15px;
+        max-height: 100%;
+        border-radius: 15px;
+        box-shadow: 2px 2px 10px 2px rgba(107, 107, 107, 0.177);
+    }
+
+    .landing-conocenos h2 {
+        margin: 35px 0 0 0;
+        padding: 0;
+        font-size: clamp(1.4rem, 3.2vw, 2rem);
+    }
+
+    .landing-conocenosP1 {
+        margin: 20px 0 0 0;
+        padding: 0 45px 0 45px;
+        font-size: clamp(0.95rem, 1.65vw, 1.1rem);
+        text-align: center;
+    }
+
+    .landing-conocenosP2 {
+        margin: 20px 0 20px 0;
+        padding: 0 45px 0 45px;
+        font-size: clamp(0.95rem, 1.65vw, 1.1rem);
+        text-align: center;
+    }
+
+    .landing-conocenos button {
+
+        margin: 0 0 30px 0;
+    }
+
+    .boton-conocemas {
+        margin: 0 0 20px 0;
+    }
+
+    .Landing-ConocenosImg {
+        display: none;
+    }
+
+    .Landing-ConocenosImg-mobile {
+        display: block;
+        margin: 0 20px 20px 20px;
+        align-self: stretch;
+        /* Ensuring full width usage */
+        /* Reduced margins to utilize more space */
+        max-height: 250px;
+        /* Increased max height */
+        overflow: hidden;
+        border-radius: 15px;
+        box-shadow: 1px 2px 6px 0 rgba(107, 107, 107, 0.129);
+        transition: transform 0.2s ease;
+        will-change: transform;
+    }
+
+    .Landing-ConocenosImg-mobile img {
+        width: 100%;
+        height: 100%;
+        border-radius: 15px;
+        object-fit: cover;
+        /* Use cover to avoid distortion */
+        object-position: center 25%;
+        /* Focus mainly on top/faces, slightly lower than absolute top */
+        pointer-events: none;
+
+    }
+
+    .ig-frame-wrap {
+        width: 100%;
+
+    }
+
+}
+
+@media (max-width: 600px) {
+
+    .Landing-ConocenosImg-mobile img {
+        object-position: center 20%;
+        /* Consistent focus on faces */
+
+    }
+
+}
+
+@media (max-width: 415px) {
+    .landing-title h1 {
+        font-size: clamp(1.4rem, 4.7vw, 2.9rem);
+    }
+
+    .landing-title {
+        margin-top: -170px;
+    }
+
+    .Landing-ConocenosImg-mobile img {
+        object-position: center 20%;
+        /* Consistent focus on faces */
+
+    }
+}

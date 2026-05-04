@@ -1,0 +1,276 @@
+.services-preview {
+    padding: 20px 20px;
+    background: linear-gradient(to bottom, #ffffff 0%, #f4f4f7 100%);
+    /* Fondo sutil de contraste */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.services-preview__header {
+    text-align: center;
+    max-width: 800px;
+    margin-bottom: 0;
+    /* Más espacio antes de las tarjetas */
+}
+
+.services-preview__header h2 {
+    font-family: "Plus Jakarta Sans", sans-serif;
+    color: #312f4e;
+    font-size: clamp(1.5rem, 2.8vw, 2rem);
+    font-weight: 600;
+    margin: 30px 0 0 0;
+    letter-spacing: 0.2px;
+    word-spacing: 2px;
+}
+
+.services-preview__header p {
+    font-family: "Plus Jakarta Sans", sans-serif;
+    color: #312f4ed5;
+    font-size: clamp(1rem, 1.8vw, 1.2rem);
+    font-weight: 400;
+    margin: 25px 0px 20px 0px;
+    max-width: 600px;
+}
+
+.services-preview__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    /* Tarjetas un poco más anchas */
+    gap: 60px;
+    /* Separación aumentada para evitar solapamiento */
+    width: 100%;
+    max-width: 1200px;
+    margin-bottom: 50px;
+    padding: 20px;
+    /* Espacio para sombras */
+}
+
+.service-card {
+    background: #ffffff;
+    border: 1px solid #eef0f5;
+    border-radius: 16px;
+    /* Radio un poco menor */
+    padding: 20px;
+    /* Reducido al mínimo viable */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+.service-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background: #312f4e;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.service-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba(49, 47, 78, 0.08);
+    border-color: #312f4e;
+}
+
+.service-card:hover::before {
+    opacity: 1;
+}
+
+.service-card__icon {
+    color: #312f4e;
+    margin-bottom: 10px;
+    /* Reducido */
+    /* Los iconos SVG tomarán el tamaño del font-size del contenedor si no tienen tamaño fijo,
+       pero MUI icons suelen tener 1em. Ajustaremos con selector svg */
+}
+
+.service-card__icon svg {
+    font-size: 2.2rem !important;
+    /* Reducido de 3rem */
+    fill: #312f4e;
+}
+
+.service-card__title {
+    font-family: "Plus Jakarta Sans", sans-serif;
+    color: #312f4e;
+    font-size: 1.15rem;
+    /* Reducido de 1.35rem */
+    margin: 0 0 5px 0;
+    /* Margin-block eliminado (top 0), bottom reducido a 5px */
+    font-weight: 700;
+    line-height: 1.25;
+}
+
+.service-card__target {
+    font-family: "Plus Jakarta Sans", sans-serif;
+    color: #555562;
+    font-size: 0.9rem;
+    /* Reducido */
+    line-height: 1.45;
+    margin-bottom: 12px;
+    /* Reducido */
+    flex-grow: 1;
+    /* Limitar texto a 4 líneas para reducir altura */
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.service-card__target strong {
+    color: #312f4e;
+    font-weight: 600;
+    display: block;
+    margin-bottom: 3px;
+    font-size: 0.9rem;
+}
+
+.service-package-label {
+    display: block;
+    font-family: "Plus Jakarta Sans", sans-serif;
+    font-size: 0.75rem;
+    /* Slightly smaller for preview card */
+    color: #92929d;
+    /* Muted color */
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.service-card__footer {
+    display: flex;
+    flex-direction: row;
+    /* Cambiado a fila para alinearlos horizontalmente */
+    justify-content: space-between;
+    align-items: center;
+    /* Alineados verticalmente al centro */
+    gap: 15px;
+    padding-top: 15px;
+    /* Restaurado un poco de aire */
+    border-top: 1px solid #f0f0f5;
+    margin-top: auto;
+}
+
+.service-card__price {
+    font-family: "Plus Jakarta Sans", sans-serif;
+    font-weight: 700;
+    color: #312f4e;
+    font-size: 0.95rem;
+    /* Reducido */
+}
+
+.service-card__link {
+    /* align-self eliminado */
+    font-family: "Plus Jakarta Sans", sans-serif;
+    color: #312f4e;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.85rem;
+    /* Reducido */
+    border-bottom: 2px solid transparent;
+    transition: border-color 0.2s;
+    white-space: nowrap;
+    /* Evitar que el link se rompa */
+}
+
+.service-card__link:hover {
+    border-bottom-color: #312f4e;
+}
+
+.services-preview__action {
+    margin-top: 10px;
+}
+
+.services-preview__action .boton-conocemas {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 30px;
+    height: 40px;
+    background: none;
+    border: 3.5px solid #312f4e;
+    color: #312f4e;
+    text-decoration: none;
+    border-radius: 100px;
+    font-family: "Plus Jakarta Sans", sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    transition: all 0.3s ease-in-out;
+    cursor: pointer;
+    background: transparent;
+    white-space: nowrap;
+}
+
+.services-preview__action .boton-conocemas:hover {
+    background: #312f4e;
+    color: white;
+    font-weight: 600;
+    box-shadow: inset 0 0 0 2px rgba(255, 255, 255, .22);
+}
+
+@media (max-width: 768px) {
+    .services-preview {
+        padding: 40px 20px;
+        /* Reducido padding del contenedor */
+    }
+
+    .services-preview__header h2 {
+        font-size: 1.8rem;
+    }
+
+    .services-preview__grid {
+        gap: 50px;
+        /* Aumentado para asegurar que no haya solapes visuales */
+        grid-template-columns: 1fr;
+    }
+
+    .service-card {
+        padding: 12px;
+        /* Reducido para altura más compacta en móvil */
+    }
+
+    .service-card__icon {
+        margin-bottom: 8px;
+    }
+
+    .service-card__icon svg {
+        font-size: 1.5rem !important;
+        /* Icono más pequeño en móvil */
+    }
+
+    .service-card__title {
+        font-size: 1.05rem;
+        margin: 0 0 4px 0;
+    }
+
+    .service-card__target {
+        font-size: 0.85rem;
+        -webkit-line-clamp: 4;
+        /* Balanceado para mostrar texto sin que sea muy alto */
+        margin-bottom: 8px;
+    }
+
+    .service-card__price {
+        font-size: 0.9rem;
+    }
+
+    .service-card__link {
+        font-size: 0.8rem;
+    }
+
+    .service-card__footer {
+        padding-top: 10px;
+        gap: 10px;
+    }
+}
