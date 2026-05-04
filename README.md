@@ -4,7 +4,7 @@
 
 **GP77** es un sitio web corporativo moderno diseñado para mostrar proyectos de arquitectura y construcción. La plataforma destaca por sus transiciones fluidas, animaciones atractivas y un diseño completamente responsivo que garantiza una experiencia de usuario de primer nivel.
 
-## 🚀 Tecnologías Principales
+## Tecnologías Principales
 
 El proyecto ha sido desarrollado utilizando las últimas tecnologías del ecosistema frontend:
 
@@ -15,7 +15,7 @@ El proyecto ha sido desarrollado utilizando las últimas tecnologías del ecosis
 - **[Lenis](https://lenis.studiofreight.com/)**: Implementación de Smooth Scroll (desplazamiento suave) para mejorar la inmersión del usuario.
 - **[Material UI (MUI)](https://mui.com/)**: Componentes pre-estilizados e iconografía.
 
-## 🌟 Características Destacadas
+## Características Destacadas
 
 - **Transiciones de Página:** Navegación inmersiva entre secciones utilizando Framer Motion.
 - **Animaciones al Hacer Scroll:** Elementos que revelan su contenido mediante GSAP a medida que el usuario se desplaza.
@@ -23,7 +23,7 @@ El proyecto ha sido desarrollado utilizando las últimas tecnologías del ecosis
 - **Galería de Proyectos Masonry:** Visualización atractiva de fotografías de arquitectura usando un layout tipo Masonry.
 - **Smooth Scrolling:** Desplazamiento nativo suave gracias a Lenis, aportando un aire premium a toda la página.
 
-## 🛠️ Instalación y Configuración Local
+## Instalación y Configuración Local
 
 Si deseas correr este proyecto de manera local, sigue los pasos a continuación:
 
@@ -46,7 +46,7 @@ Si deseas correr este proyecto de manera local, sigue los pasos a continuación:
 4. **Abre en el navegador:**  
    Dirígete a `http://localhost:5173/` para ver la aplicación en vivo.
 
-## 📄 Licencia
+## Licencia
 
 Este proyecto se encuentra bajo la Licencia [MIT](LICENSE).
 
