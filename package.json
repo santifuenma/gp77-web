@@ -1,6 +1,14 @@
 {
-  "name": "arquitectura-web-css",
-  "version": "0.0.1",
+  "name": "gp77-web",
+  "version": "1.0.0",
+  "description": "Sitio web moderno de GP77 desarrollado con React, Vite, GSAP y Framer Motion.",
+  "author": "Santiago Fuenmayor",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/santifuenma/gp77-web.git"
+  },
+  "keywords": ["react", "vite", "framer-motion", "gsap", "architecture-website"],
   "private": true,
   "scripts": {
     "dev": "vite --host",
