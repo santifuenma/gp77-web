@@ -45,12 +45,14 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "flex-end",
+    borderBottomWidth: 1.5,
+    borderBottomColor: "#1a1a1a",
+    paddingBottom: 4,
     marginBottom: 34,
   },
   headerName: {
     fontSize: 13,
     fontFamily: "Helvetica-Bold",
-    textDecoration: "underline",
     letterSpacing: 0.3,
   },
   headerRif: {
