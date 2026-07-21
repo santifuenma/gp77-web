@@ -86,7 +86,7 @@ const styles = StyleSheet.create({
   },
   coverBlock: {
     alignItems: "center",
-    marginTop: 40,
+    marginTop: 172,
   },
   coverEyebrow: {
     fontSize: 12,
@@ -117,7 +117,7 @@ const styles = StyleSheet.create({
   coverDate: {
     fontSize: 10.5,
     textAlign: "center",
-    marginTop: 140,
+    marginTop: 230,
   },
 
   /* --- Cuerpo / tabla --- */
