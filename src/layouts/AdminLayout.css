@@ -26,11 +26,11 @@
   color: var(--color-primary);
   font-family: var(--font-primary);
   font-weight: var(--fw-semibold);
-  font-size: 1rem;
+  font-size: var(--admin-fs-base);
 }
 
 .admin-header__logo {
-  height: 32px;
+  height: 28px;
 }
 
 .admin-header__user {
@@ -42,7 +42,7 @@
 
 .admin-header__email {
   font-family: var(--font-primary);
-  font-size: 0.85rem;
+  font-size: var(--admin-fs-xs);
   color: var(--color-text-soft);
   overflow: hidden;
   text-overflow: ellipsis;
@@ -53,21 +53,6 @@
 .admin-header__signout {
   flex-shrink: 0;
   height: 34px;
-  padding: 0 16px;
-  border: var(--border-brand);
-  border-radius: var(--radius-pill);
-  background: none;
-  color: var(--color-primary);
-  font-family: var(--font-primary);
-  font-size: 0.8rem;
-  font-weight: var(--fw-semibold);
-  cursor: pointer;
-  transition: var(--transition-base);
-}
-
-.admin-header__signout:hover {
-  background-color: var(--color-primary);
-  color: #fff;
 }
 
 .admin-main {

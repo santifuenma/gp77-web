@@ -7,13 +7,13 @@
 .proposal-form__client {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 12px;
+  gap: 10px;
 }
 
 .proposal-form__items {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 8px;
 }
 
 /* --- Línea de grieta: mobile-first, mini-tarjeta apilada --- */
@@ -23,10 +23,10 @@
   flex-direction: column;
   gap: 10px;
   background: var(--color-surface);
-  border-radius: var(--radius-md);
-  box-shadow: var(--shadow-sm);
-  padding: 16px;
-  padding-right: 44px;
+  border: var(--admin-border-thin) solid var(--color-border);
+  border-radius: var(--admin-radius);
+  padding: 14px;
+  padding-right: 46px;
 }
 
 .line-item__field {
@@ -37,17 +37,14 @@
 
 .line-item__label {
   font-family: var(--font-primary);
-  font-size: 0.75rem;
+  font-size: var(--admin-fs-xs);
   color: var(--color-text-faint);
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  font-weight: var(--fw-semibold);
+  font-weight: var(--fw-medium);
 }
 
 .line-item__select,
 .line-item__area {
-  height: 44px;
-  border-radius: var(--radius-sm);
+  height: 38px;
 }
 
 .line-item__subtotal {
@@ -55,69 +52,46 @@
   align-items: center;
   justify-content: space-between;
   padding-top: 8px;
-  border-top: 1px solid var(--color-border);
+  border-top: var(--admin-border-thin) solid var(--color-border);
 }
 
 .line-item__subtotal-value {
   font-family: var(--font-primary);
   color: var(--color-primary);
   font-weight: var(--fw-bold);
-  font-size: 1rem;
+  font-size: var(--admin-fs-md);
 }
 
 .line-item__remove {
   position: absolute;
-  top: 10px;
-  right: 10px;
-  width: 28px;
-  height: 28px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: none;
-  border-radius: 50%;
-  background: var(--color-bg);
-  color: var(--color-text-soft);
-  cursor: pointer;
-  font-size: 0.85rem;
-  transition: var(--transition-base);
+  top: 8px;
+  right: 8px;
 }
 
-.line-item__remove:hover:not(:disabled) {
-  background: var(--color-error-bg);
-  color: var(--color-error);
-}
-
-.line-item__remove:disabled {
-  opacity: 0.3;
-  cursor: not-allowed;
-}
-
+/* --- Botones de acción de formulario --- */
 .proposal-form__add {
   align-self: flex-start;
-  height: 42px;
-  padding: 0 20px;
-  font-size: 0.9rem;
 }
 
 .proposal-form__total {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 16px 20px;
+  padding: 14px 16px;
   background: var(--color-primary-tint-bg);
-  border-radius: var(--radius-md);
+  border-radius: var(--admin-radius);
   font-family: var(--font-primary);
   color: var(--color-primary);
+  font-size: var(--admin-fs-base);
 }
 
 .proposal-form__total strong {
-  font-size: 1.3rem;
+  font-size: var(--admin-fs-2xl);
 }
 
 .proposal-form__submit {
   align-self: stretch;
-  height: 48px;
+  height: 44px;
 }
 
 /* --- Desktop: la línea pasa a fila horizontal --- */
@@ -129,8 +103,8 @@
   .line-item {
     flex-direction: row;
     align-items: center;
-    padding: 12px 16px;
-    padding-right: 16px;
+    padding: 10px 14px;
+    padding-right: 14px;
   }
 
   .line-item__field {
@@ -167,6 +141,6 @@
 
   .proposal-form__submit {
     align-self: flex-end;
-    min-width: 260px;
+    min-width: 240px;
   }
 }

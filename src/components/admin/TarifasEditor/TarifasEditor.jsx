@@ -46,7 +46,7 @@ export default function TarifasEditor() {
   return (
     <div className="tarifas-editor">
       {rates.map((rate) => (
-        <div key={rate.severity} className="card tarifas-editor__row">
+        <div key={rate.severity} className="tarifas-editor__row">
           <div className="tarifas-editor__info">
             <span className="tarifas-editor__severity">{rate.severity}</span>
             <span className="tarifas-editor__label">{rate.label}</span>
@@ -55,7 +55,7 @@ export default function TarifasEditor() {
           <div className="tarifas-editor__price">
             <span className="tarifas-editor__prefix">$/m²</span>
             <input
-              className="form-input tarifas-editor__input"
+              className="admin-input tarifas-editor__input"
               type="number"
               min="0"
               step="0.01"
@@ -66,7 +66,7 @@ export default function TarifasEditor() {
 
           <button
             type="button"
-            className="btn-pill tarifas-editor__save"
+            className="admin-btn admin-btn--secondary tarifas-editor__save"
             onClick={() => handleSave(rate.severity)}
             disabled={savingSeverity === rate.severity}
           >

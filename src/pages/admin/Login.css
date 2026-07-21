@@ -2,36 +2,40 @@
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  padding-top: 40px;
+  padding-top: 48px;
 }
 
 .admin-login__card {
   width: 100%;
-  max-width: 400px;
-  padding: 32px 28px;
+  max-width: 360px;
+  padding: 28px;
   text-align: center;
+  background: var(--color-surface);
+  border: var(--admin-border-thin) solid var(--color-border);
+  border-radius: var(--admin-radius);
 }
 
 .admin-login__title {
   font-family: var(--font-primary);
   color: var(--color-primary);
   font-weight: var(--fw-semibold);
-  font-size: var(--fs-h3);
-  margin: 0 0 8px 0;
+  font-size: var(--admin-fs-lg);
+  margin: 0 0 4px 0;
 }
 
 .admin-login__lead {
-  margin: 0 0 24px 0;
+  text-align: center;
+  margin: 0 0 20px 0;
   max-width: none;
 }
 
 .admin-login__form {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 10px;
 }
 
 .admin-login__submit {
-  margin-top: 8px;
-  align-self: center;
+  margin-top: 6px;
+  width: 100%;
 }

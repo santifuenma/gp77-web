@@ -12,7 +12,7 @@ export default function LineItemRow({ item, rates, subtotal, onChange, onRemove,
       <div className="line-item__field">
         <label className="line-item__label">Tipo de grieta</label>
         <select
-          className="form-input line-item__select"
+          className="admin-input line-item__select"
           value={item.severity}
           onChange={(e) => onChange(item.id, { severity: e.target.value })}
         >
@@ -27,7 +27,7 @@ export default function LineItemRow({ item, rates, subtotal, onChange, onRemove,
       <div className="line-item__field">
         <label className="line-item__label">m²</label>
         <input
-          className="form-input line-item__area"
+          className="admin-input line-item__area"
           type="number"
           min="0"
           step="0.1"
@@ -44,7 +44,7 @@ export default function LineItemRow({ item, rates, subtotal, onChange, onRemove,
 
       <button
         type="button"
-        className="line-item__remove"
+        className="admin-btn admin-btn--ghost line-item__remove"
         onClick={() => onRemove(item.id)}
         disabled={!canRemove}
         aria-label="Quitar línea"

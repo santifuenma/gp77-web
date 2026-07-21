@@ -9,7 +9,7 @@ export default function NuevaPropuesta() {
       <Helmet>
         <title>Nueva Propuesta | Admin GP77</title>
       </Helmet>
-      <h1 className="section-title nueva-propuesta__title">Nueva Propuesta</h1>
+      <h1 className="admin-title nueva-propuesta__title">Nueva Propuesta</h1>
       <ProposalForm />
     </main>
   );

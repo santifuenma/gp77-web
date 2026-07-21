@@ -37,8 +37,11 @@ export default function Propuestas() {
       </Helmet>
 
       <div className="propuestas-page__header">
-        <h1 className="section-title propuestas-page__title">Generador de Propuestas</h1>
-        <Link to="/admin/propuestas/nueva" className="btn-pill propuestas-page__new">
+        <h1 className="admin-title">Generador de Propuestas</h1>
+        <Link
+          to="/admin/propuestas/nueva"
+          className="admin-btn admin-btn--primary propuestas-page__new"
+        >
           + Nueva propuesta
         </Link>
       </div>
@@ -54,19 +57,19 @@ export default function Propuestas() {
       {!loading && proposals.length > 0 && (
         <div className="propuestas-list">
           {proposals.map((proposal) => (
-            <div key={proposal.id} className="card propuesta-card">
-              <div className="propuesta-card__info">
-                <p className="propuesta-card__client">{proposal.client_name}</p>
-                <p className="propuesta-card__meta">
+            <div key={proposal.id} className="propuesta-row">
+              <div className="propuesta-row__info">
+                <p className="propuesta-row__client">{proposal.client_name}</p>
+                <p className="propuesta-row__meta">
                   {proposal.client_address} ·{" "}
                   {new Date(proposal.created_at).toLocaleDateString("es-VE")}
                 </p>
               </div>
-              <div className="propuesta-card__right">
-                <span className="propuesta-card__total">{currency(proposal.total)}</span>
+              <div className="propuesta-row__right">
+                <span className="propuesta-row__total">{currency(proposal.total)}</span>
                 <button
                   type="button"
-                  className="btn-pill propuesta-card__download"
+                  className="admin-btn admin-btn--secondary propuesta-row__download"
                   onClick={() => handleDownload(proposal)}
                   disabled={downloadingId === proposal.id}
                 >

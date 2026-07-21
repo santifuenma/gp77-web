@@ -1,11 +1,10 @@
 .tarifas-editor {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
+  border-top: var(--admin-border-thin) solid var(--color-border);
 }
 
 .tarifas-editor__status {
   font-family: var(--font-primary);
+  font-size: var(--admin-fs-base);
   color: var(--color-text-soft);
 }
 
@@ -13,14 +12,15 @@
   display: flex;
   align-items: center;
   gap: 16px;
-  padding: 16px;
+  padding: 14px 4px;
+  border-bottom: var(--admin-border-thin) solid var(--color-border);
   flex-wrap: wrap;
 }
 
 .tarifas-editor__info {
   display: flex;
-  align-items: baseline;
-  gap: 8px;
+  align-items: center;
+  gap: 10px;
   min-width: 140px;
 }
 
@@ -28,12 +28,13 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 32px;
-  height: 32px;
+  width: 28px;
+  height: 28px;
   border-radius: 50%;
   background: var(--color-primary-tint-bg);
   color: var(--color-primary);
   font-family: var(--font-primary);
+  font-size: var(--admin-fs-sm);
   font-weight: var(--fw-bold);
   flex-shrink: 0;
 }
@@ -42,6 +43,7 @@
   font-family: var(--font-primary);
   color: var(--color-primary);
   font-weight: var(--fw-semibold);
+  font-size: var(--admin-fs-base);
 }
 
 .tarifas-editor__price {
@@ -55,20 +57,17 @@
 .tarifas-editor__prefix {
   font-family: var(--font-primary);
   color: var(--color-text-faint);
-  font-size: 0.85rem;
+  font-size: var(--admin-fs-xs);
   white-space: nowrap;
 }
 
 .tarifas-editor__input {
-  height: 40px;
-  max-width: 140px;
+  height: 36px;
+  max-width: 120px;
 }
 
 .tarifas-editor__save {
-  height: 40px;
-  padding: 0 20px;
-  font-size: 0.85rem;
-  white-space: nowrap;
+  width: 96px;
 }
 
 @media (max-width: 600px) {

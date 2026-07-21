@@ -1,45 +1,54 @@
-.admin-hub__title {
-  margin-top: 0;
-  text-align: left;
-}
-
-.admin-hub__lead {
-  text-align: left;
-  margin: 8px 0 0 0;
-  max-width: none;
-}
-
 .admin-hub__grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-  gap: 16px;
-  margin-top: 24px;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 12px;
+  margin-top: 28px;
 }
 
 .admin-hub__tile {
-  display: block;
-  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  padding: 18px 20px;
   text-decoration: none;
-  transition: var(--transition-base);
+  border-radius: var(--admin-radius);
+  border: var(--admin-border-thin) solid var(--color-border);
+  background: var(--color-surface);
+  box-shadow: none;
+  transition: border-color var(--admin-transition), box-shadow var(--admin-transition);
 }
 
 .admin-hub__tile:hover {
-  transform: translateY(-3px);
-  box-shadow: var(--shadow-lg);
+  border-color: var(--color-primary);
+  box-shadow: var(--shadow-sm);
 }
 
 .admin-hub__tile-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   font-family: var(--font-primary);
   color: var(--color-primary);
   font-weight: var(--fw-semibold);
-  font-size: 1.1rem;
-  margin: 0 0 8px 0;
+  font-size: var(--admin-fs-lg);
+  margin: 0 0 6px 0;
+}
+
+.admin-hub__tile-title::after {
+  content: "→";
+  color: var(--color-text-faint);
+  font-weight: var(--fw-regular);
+  transition: transform var(--admin-transition);
+}
+
+.admin-hub__tile:hover .admin-hub__tile-title::after {
+  transform: translateX(2px);
+  color: var(--color-primary);
 }
 
 .admin-hub__tile-desc {
   font-family: var(--font-primary);
   color: var(--color-text-soft);
-  font-size: 0.9rem;
+  font-size: var(--admin-fs-sm);
   line-height: 1.5;
   margin: 0;
 }

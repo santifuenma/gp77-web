@@ -3,92 +3,77 @@
   align-items: flex-start;
   justify-content: space-between;
   gap: 16px;
-  margin-bottom: 24px;
+  margin-bottom: 20px;
   flex-wrap: wrap;
-}
-
-.propuestas-page__title {
-  margin: 0;
-  text-align: left;
-}
-
-.propuestas-page__new {
-  white-space: nowrap;
-  height: 42px;
-  padding: 0 20px;
-  font-size: 0.9rem;
-  text-decoration: none;
 }
 
 .propuestas-page__empty {
   font-family: var(--font-primary);
+  font-size: var(--admin-fs-base);
   color: var(--color-text-soft);
   text-align: center;
-  padding: 40px 0;
+  padding: 48px 0;
 }
 
 .propuestas-list {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
+  border-top: var(--admin-border-thin) solid var(--color-border);
 }
 
-.propuesta-card {
+.propuesta-row {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 12px;
-  padding: 16px;
+  padding: 14px 4px;
+  border-bottom: var(--admin-border-thin) solid var(--color-border);
   flex-wrap: wrap;
 }
 
-.propuesta-card__info {
+.propuesta-row__info {
   min-width: 0;
 }
 
-.propuesta-card__client {
+.propuesta-row__client {
   font-family: var(--font-primary);
   color: var(--color-primary);
   font-weight: var(--fw-semibold);
-  font-size: 1rem;
-  margin: 0 0 4px 0;
+  font-size: var(--admin-fs-base);
+  margin: 0 0 2px 0;
 }
 
-.propuesta-card__meta {
+.propuesta-row__meta {
   font-family: var(--font-primary);
   color: var(--color-text-soft);
-  font-size: 0.85rem;
+  font-size: var(--admin-fs-xs);
   margin: 0;
 }
 
-.propuesta-card__right {
+.propuesta-row__right {
   display: flex;
   align-items: center;
   gap: 16px;
 }
 
-.propuesta-card__total {
+.propuesta-row__total {
   font-family: var(--font-primary);
   color: var(--color-primary);
   font-weight: var(--fw-bold);
-  font-size: 1.05rem;
+  font-size: var(--admin-fs-md);
   white-space: nowrap;
 }
 
-.propuesta-card__download {
-  height: 38px;
-  padding: 0 16px;
-  font-size: 0.8rem;
-  white-space: nowrap;
+.propuesta-row__download {
+  height: 32px;
+  padding: 0 12px;
 }
 
 @media (max-width: 600px) {
-  .propuesta-card {
+  .propuesta-row {
     flex-direction: column;
     align-items: flex-start;
   }
 
-  .propuesta-card__right {
+  .propuesta-row__right {
     width: 100%;
     justify-content: space-between;
   }

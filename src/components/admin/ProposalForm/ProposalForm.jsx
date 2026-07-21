@@ -110,13 +110,13 @@ export default function ProposalForm() {
     <form className="proposal-form" onSubmit={onSubmit}>
       <div className="proposal-form__client">
         <input
-          className="form-input"
+          className="admin-input"
           placeholder="Nombre del cliente"
           value={clientName}
           onChange={(e) => setClientName(e.target.value)}
         />
         <input
-          className="form-input"
+          className="admin-input"
           placeholder="Dirección"
           value={clientAddress}
           onChange={(e) => setClientAddress(e.target.value)}
@@ -139,7 +139,7 @@ export default function ProposalForm() {
 
       <button
         type="button"
-        className="btn-pill proposal-form__add"
+        className="admin-btn admin-btn--secondary proposal-form__add"
         onClick={handleAddItem}
         disabled={ratesLoading}
       >
@@ -159,7 +159,7 @@ export default function ProposalForm() {
       {err && <p className="alert-error">{err}</p>}
 
       <button
-        className="btn-pill proposal-form__submit"
+        className="admin-btn admin-btn--primary proposal-form__submit"
         type="submit"
         disabled={submitting || ratesLoading}
       >

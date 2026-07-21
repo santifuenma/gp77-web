@@ -9,8 +9,8 @@ export default function TarifasPage() {
       <Helmet>
         <title>Tarifas | Admin GP77</title>
       </Helmet>
-      <h1 className="section-title tarifas-page__title">Tarifas de Grietas</h1>
-      <p className="section-lead tarifas-page__lead">
+      <h1 className="admin-title">Tarifas de Grietas</h1>
+      <p className="admin-lead tarifas-page__lead">
         Precio por m² usado al calcular nuevas propuestas.
       </p>
       <TarifasEditor />

@@ -11,14 +11,12 @@ export default function AdminHub() {
         <title>Admin | GP77</title>
       </Helmet>
 
-      <h1 className="section-title admin-hub__title">Panel de Herramientas</h1>
-      <p className="section-lead admin-hub__lead">
-        Elige una herramienta para empezar.
-      </p>
+      <h1 className="admin-title">Panel de Herramientas</h1>
+      <p className="admin-lead">Elige una herramienta para empezar.</p>
 
       <div className="admin-hub__grid">
         {adminTools.map((tool) => (
-          <Link key={tool.id} to={tool.path} className="card admin-hub__tile">
+          <Link key={tool.id} to={tool.path} className="admin-hub__tile">
             <h2 className="admin-hub__tile-title">{tool.title}</h2>
             <p className="admin-hub__tile-desc">{tool.description}</p>
           </Link>

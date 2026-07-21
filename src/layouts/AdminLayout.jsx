@@ -2,6 +2,7 @@ import React from "react";
 import { Link, Outlet, useNavigate } from "react-router-dom";
 import { AuthProvider, useAuth } from "../context/AuthContext";
 import logo from "../assets/img/LogoGP.png";
+import "../styles/admin-tokens.css";
 import "./AdminLayout.css";
 
 function AdminHeader() {
@@ -25,7 +26,7 @@ function AdminHeader() {
           <span className="admin-header__email">{user.email}</span>
           <button
             type="button"
-            className="admin-header__signout"
+            className="admin-btn admin-btn--secondary admin-header__signout"
             onClick={handleSignOut}
           >
             Salir

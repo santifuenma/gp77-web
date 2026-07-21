@@ -42,15 +42,15 @@ export default function Login() {
         <title>Admin | GP77</title>
       </Helmet>
 
-      <div className="card admin-login__card">
+      <div className="admin-login__card">
         <h1 className="admin-login__title">Acceso Arquitectos</h1>
-        <p className="section-lead admin-login__lead">
+        <p className="admin-lead admin-login__lead">
           Ingresa con tu cuenta para entrar al panel interno.
         </p>
 
         <form className="admin-login__form" onSubmit={onSubmit}>
           <input
-            className="form-input"
+            className="admin-input"
             type="email"
             placeholder="Correo electrónico"
             value={email}
@@ -59,7 +59,7 @@ export default function Login() {
             required
           />
           <input
-            className="form-input"
+            className="admin-input"
             type="password"
             placeholder="Contraseña"
             value={password}
@@ -70,7 +70,11 @@ export default function Login() {
 
           {err && <p className="alert-error">{err}</p>}
 
-          <button className="btn-pill admin-login__submit" type="submit" disabled={submitting}>
+          <button
+            className="admin-btn admin-btn--primary admin-login__submit"
+            type="submit"
+            disabled={submitting}
+          >
             {submitting ? "Ingresando…" : "Ingresar"}
           </button>
         </form>
