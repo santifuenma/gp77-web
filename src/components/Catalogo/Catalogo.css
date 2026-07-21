@@ -103,7 +103,7 @@
   cursor: pointer;
 }
 .modal .close:hover {
-  color: var(--pacific-cyan);
+  color: var(--color-primary-light);
 }
 .modal-swiper {
   width: 80%;
