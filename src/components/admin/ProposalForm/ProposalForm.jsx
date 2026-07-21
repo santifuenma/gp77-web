@@ -103,7 +103,7 @@ export default function ProposalForm() {
       items: data.items ?? payloadItems,
     });
 
-    navigate("/admin/propuestas");
+    navigate("/admin/propuestas", { state: { successClient: clientName } });
   };
 
   return (

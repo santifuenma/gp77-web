@@ -4,6 +4,14 @@
   color: var(--color-text-soft);
 }
 
+.tarifas-editor__intro {
+  font-family: var(--font-primary);
+  font-size: var(--admin-fs-sm);
+  color: var(--color-text-soft);
+  line-height: 1.5;
+  margin: 0 0 16px 0;
+}
+
 /* El editor vive dentro del modal de Tarifas (ancho acotado), así que
    las filas siempre van apiladas, sin variante horizontal de escritorio. */
 .tarifas-editor__row {
@@ -15,7 +23,7 @@
   border-bottom: var(--admin-border-thin) solid var(--color-border);
 }
 
-.tarifas-editor__row:first-child {
+.tarifas-editor__row:first-of-type {
   padding-top: 0;
 }
 

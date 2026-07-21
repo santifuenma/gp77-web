@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { listProposals, getProposalWithItems } from "../../../lib/proposals";
 import { generateProposalPdf } from "../../../lib/pdf/generateProposalPdf";
@@ -14,10 +14,14 @@ const currency = (value) =>
   })}`;
 
 export default function Propuestas() {
+  const location = useLocation();
   const [proposals, setProposals] = useState([]);
   const [loading, setLoading] = useState(true);
   const [downloadingId, setDownloadingId] = useState(null);
   const [showTarifas, setShowTarifas] = useState(false);
+  const [successClient, setSuccessClient] = useState(
+    () => location.state?.successClient || null
+  );
 
   useEffect(() => {
     listProposals().then(({ data }) => {
@@ -25,6 +29,12 @@ export default function Propuestas() {
       setLoading(false);
     });
   }, []);
+
+  useEffect(() => {
+    if (!successClient) return;
+    const timer = setTimeout(() => setSuccessClient(null), 6000);
+    return () => clearTimeout(timer);
+  }, [successClient]);
 
   const handleDownload = async (proposal) => {
     setDownloadingId(proposal.id);
@@ -40,7 +50,18 @@ export default function Propuestas() {
       </Helmet>
 
       <div className="propuestas-page__header">
-        <h1 className="admin-title">Generador de Propuestas</h1>
+        <div>
+          <h1 className="admin-title">Generador de Propuestas</h1>
+          {!loading && (
+            <p className="admin-lead propuestas-page__count">
+              {proposals.length === 0
+                ? "Ninguna propuesta generada todavía"
+                : proposals.length === 1
+                ? "1 propuesta generada"
+                : `${proposals.length} propuestas generadas`}
+            </p>
+          )}
+        </div>
         <div className="propuestas-page__actions">
           <button
             type="button"
@@ -58,6 +79,20 @@ export default function Propuestas() {
         </div>
       </div>
 
+      {successClient && (
+        <p className="alert-success propuestas-page__banner">
+          Propuesta para <strong>{successClient}</strong> generada correctamente. El PDF se descargó a tu carpeta de descargas.
+          <button
+            type="button"
+            className="propuestas-page__banner-close"
+            onClick={() => setSuccessClient(null)}
+            aria-label="Cerrar aviso"
+          >
+            ✕
+          </button>
+        </p>
+      )}
+
       {showTarifas && (
         <Modal title="Tarifas de Grietas" onClose={() => setShowTarifas(false)}>
           <TarifasEditor />
@@ -68,9 +103,13 @@ export default function Propuestas() {
         {loading && <p className="propuestas-page__empty">Cargando…</p>}
 
         {!loading && proposals.length === 0 && (
-          <p className="propuestas-page__empty">
-            Aún no has generado ninguna propuesta.
-          </p>
+          <div className="propuestas-page__empty">
+            <p className="propuestas-page__empty-title">Aún no hay propuestas</p>
+            <p className="propuestas-page__empty-desc">
+              Usa "+ Nueva propuesta" para calcular el presupuesto de tu
+              primer cliente y generar el PDF.
+            </p>
+          </div>
         )}
 
         {!loading &&

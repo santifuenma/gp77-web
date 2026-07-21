@@ -1,3 +1,22 @@
+.nueva-propuesta__back {
+  display: inline-block;
+  font-family: var(--font-primary);
+  font-size: var(--admin-fs-sm);
+  color: var(--color-text-soft);
+  text-decoration: none;
+  margin-bottom: 14px;
+  transition: color var(--admin-transition);
+}
+
+.nueva-propuesta__back:hover {
+  color: var(--color-primary);
+}
+
 .nueva-propuesta__title {
+  margin: 0 0 4px 0;
+}
+
+.nueva-propuesta__lead {
   margin: 0 0 20px 0;
+  max-width: 56ch;
 }

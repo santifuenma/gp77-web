@@ -22,6 +22,19 @@
   box-shadow: var(--shadow-sm);
 }
 
+.admin-hub__tile-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  margin-bottom: 10px;
+  border-radius: 50%;
+  background: var(--color-primary-tint-bg);
+  color: var(--color-primary);
+  font-size: 20px;
+}
+
 .admin-hub__tile-title {
   display: flex;
   align-items: center;

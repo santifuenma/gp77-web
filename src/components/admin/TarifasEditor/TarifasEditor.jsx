@@ -45,6 +45,12 @@ export default function TarifasEditor() {
 
   return (
     <div className="tarifas-editor">
+      <p className="tarifas-editor__intro">
+        Este precio por m² se usa para calcular el total de las próximas
+        propuestas. Cambiar una tarifa aquí <strong>no afecta</strong> el
+        total de propuestas que ya generaste antes.
+      </p>
+
       {rates.map((rate) => (
         <div key={rate.severity} className="tarifas-editor__row">
           <div className="tarifas-editor__info">

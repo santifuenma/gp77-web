@@ -22,12 +22,59 @@
   }
 }
 
+.propuestas-page__count {
+  margin: 4px 0 0 0;
+}
+
+.propuestas-page__banner {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding-right: 36px;
+  margin-bottom: 16px;
+}
+
+.propuestas-page__banner-close {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: inherit;
+  opacity: 0.6;
+  cursor: pointer;
+  font-size: 0.85rem;
+  padding: 4px;
+}
+
+.propuestas-page__banner-close:hover {
+  opacity: 1;
+}
+
 .propuestas-page__empty {
-  font-family: var(--font-primary);
-  font-size: var(--admin-fs-base);
-  color: var(--color-text-soft);
   text-align: center;
-  padding: 40px 20px;
+  padding: 48px 20px;
+}
+
+.propuestas-page__empty-title {
+  font-family: var(--font-primary);
+  font-weight: var(--fw-semibold);
+  color: var(--color-primary);
+  font-size: var(--admin-fs-base);
+  margin: 0 0 6px 0;
+}
+
+.propuestas-page__empty-desc {
+  font-family: var(--font-primary);
+  font-size: var(--admin-fs-sm);
+  color: var(--color-text-soft);
+  margin: 0;
+  max-width: 40ch;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.5;
 }
 
 .propuesta-row {
