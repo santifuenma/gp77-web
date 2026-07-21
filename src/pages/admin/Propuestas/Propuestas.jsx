@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { listProposals, getProposalWithItems } from "../../../lib/proposals";
 import { generateProposalPdf } from "../../../lib/pdf/generateProposalPdf";
+import Modal from "../../../components/admin/Modal/Modal";
+import TarifasEditor from "../../../components/admin/TarifasEditor/TarifasEditor";
 import "./Propuestas.css";
 
 const currency = (value) =>
@@ -15,6 +17,7 @@ export default function Propuestas() {
   const [proposals, setProposals] = useState([]);
   const [loading, setLoading] = useState(true);
   const [downloadingId, setDownloadingId] = useState(null);
+  const [showTarifas, setShowTarifas] = useState(false);
 
   useEffect(() => {
     listProposals().then(({ data }) => {
@@ -38,13 +41,28 @@ export default function Propuestas() {
 
       <div className="propuestas-page__header">
         <h1 className="admin-title">Generador de Propuestas</h1>
-        <Link
-          to="/admin/propuestas/nueva"
-          className="admin-btn admin-btn--primary propuestas-page__new"
-        >
-          + Nueva propuesta
-        </Link>
+        <div className="propuestas-page__actions">
+          <button
+            type="button"
+            className="admin-btn admin-btn--secondary"
+            onClick={() => setShowTarifas(true)}
+          >
+            Tarifas
+          </button>
+          <Link
+            to="/admin/propuestas/nueva"
+            className="admin-btn admin-btn--primary propuestas-page__new"
+          >
+            + Nueva propuesta
+          </Link>
+        </div>
       </div>
+
+      {showTarifas && (
+        <Modal title="Tarifas de Grietas" onClose={() => setShowTarifas(false)}>
+          <TarifasEditor />
+        </Modal>
+      )}
 
       <div className="admin-panel admin-panel--flush propuestas-list">
         {loading && <p className="propuestas-page__empty">Cargando…</p>}

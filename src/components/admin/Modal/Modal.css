@@ -1,0 +1,73 @@
+.admin-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(20, 19, 31, 0.4);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  z-index: 500;
+  padding: 0;
+}
+
+.admin-modal {
+  width: 100%;
+  max-width: 480px;
+  max-height: 85vh;
+  overflow-y: auto;
+  background: var(--color-surface);
+  border-radius: var(--admin-radius) var(--admin-radius) 0 0;
+  box-shadow: var(--shadow-lg);
+  animation: admin-modal-in var(--admin-transition);
+}
+
+.admin-modal__header {
+  position: sticky;
+  top: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 16px 16px 12px 20px;
+  background: var(--color-surface);
+  border-bottom: var(--admin-border-thin) solid var(--color-border);
+}
+
+.admin-modal__title {
+  font-family: var(--font-primary);
+  color: var(--color-primary);
+  font-weight: var(--fw-semibold);
+  font-size: var(--admin-fs-lg);
+  margin: 0;
+}
+
+.admin-modal__close {
+  flex-shrink: 0;
+}
+
+.admin-modal__body {
+  padding: 16px 20px 24px 20px;
+}
+
+@keyframes admin-modal-in {
+  from {
+    transform: translateY(16px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* En desktop se centra como diálogo en vez de hoja inferior */
+@media (min-width: 601px) {
+  .admin-modal-overlay {
+    align-items: center;
+    padding: 20px;
+  }
+
+  .admin-modal {
+    border-radius: var(--admin-radius);
+    max-height: 80vh;
+  }
+}

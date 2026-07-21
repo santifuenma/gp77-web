@@ -23,7 +23,6 @@ const AdminLogin = lazy(() => import("../../pages/admin/Login"));
 const AdminHub = lazy(() => import("../../pages/admin/AdminHub"));
 const Propuestas = lazy(() => import("../../pages/admin/Propuestas/Propuestas"));
 const NuevaPropuesta = lazy(() => import("../../pages/admin/Propuestas/NuevaPropuesta"));
-const TarifasPage = lazy(() => import("../../pages/admin/Tarifas/TarifasPage"));
 
 const AnimatedRoutes = () => {
     const location = useLocation();
@@ -81,7 +80,6 @@ const AnimatedRoutes = () => {
                         <Route index element={<AdminHub />} />
                         <Route path="propuestas" element={<Propuestas />} />
                         <Route path="propuestas/nueva" element={<NuevaPropuesta />} />
-                        <Route path="tarifas" element={<TarifasPage />} />
                     </Route>
                 </Route>
             </Routes>

@@ -9,10 +9,4 @@ export const adminTools = [
       "Calcula el presupuesto de reparación de grietas y genera el PDF para el cliente.",
     path: "/admin/propuestas",
   },
-  {
-    id: "tarifas",
-    title: "Tarifas de Grietas",
-    description: "Edita el precio por m² de cada tipo de grieta (A, B, C).",
-    path: "/admin/tarifas",
-  },
 ];

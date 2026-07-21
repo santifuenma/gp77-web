@@ -7,6 +7,21 @@
   flex-wrap: wrap;
 }
 
+.propuestas-page__actions {
+  display: flex;
+  gap: 8px;
+}
+
+@media (max-width: 600px) {
+  .propuestas-page__actions {
+    width: 100%;
+  }
+
+  .propuestas-page__actions .admin-btn {
+    flex: 1;
+  }
+}
+
 .propuestas-page__empty {
   font-family: var(--font-primary);
   font-size: var(--admin-fs-base);

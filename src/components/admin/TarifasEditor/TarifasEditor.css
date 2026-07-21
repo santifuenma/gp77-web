@@ -4,16 +4,23 @@
   color: var(--color-text-soft);
 }
 
+/* El editor vive dentro del modal de Tarifas (ancho acotado), así que
+   las filas siempre van apiladas, sin variante horizontal de escritorio. */
 .tarifas-editor__row {
   display: flex;
-  align-items: center;
-  gap: 16px;
-  padding: 14px 20px;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 8px;
+  padding: 14px 0;
   border-bottom: var(--admin-border-thin) solid var(--color-border);
-  flex-wrap: wrap;
+}
+
+.tarifas-editor__row:first-child {
+  padding-top: 0;
 }
 
 .tarifas-editor__row:last-child {
+  padding-bottom: 0;
   border-bottom: none;
 }
 
@@ -21,7 +28,6 @@
   display: flex;
   align-items: center;
   gap: 10px;
-  min-width: 140px;
 }
 
 .tarifas-editor__severity {
@@ -50,8 +56,6 @@
   display: flex;
   align-items: center;
   gap: 8px;
-  flex: 1;
-  min-width: 140px;
 }
 
 .tarifas-editor__prefix {
@@ -63,30 +67,9 @@
 
 .tarifas-editor__input {
   height: 36px;
-  max-width: 120px;
+  flex: 1;
 }
 
 .tarifas-editor__save {
-  width: 96px;
-}
-
-@media (max-width: 600px) {
-  .tarifas-editor__row {
-    flex-direction: column;
-    align-items: stretch;
-    padding: 14px 16px;
-  }
-
-  .tarifas-editor__price {
-    width: 100%;
-  }
-
-  .tarifas-editor__input {
-    max-width: none;
-    flex: 1;
-  }
-
-  .tarifas-editor__save {
-    width: 100%;
-  }
+  width: 100%;
 }
