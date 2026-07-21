@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "flex-end",
-    marginBottom: 6,
+    marginBottom: 34,
   },
   headerName: {
     fontSize: 13,
@@ -73,18 +73,18 @@ const styles = StyleSheet.create({
     lineHeight: 1.4,
   },
 
-  /* --- Portada --- */
+  /* --- Marca de agua: se repite en las 3 páginas, no solo la portada --- */
   watermark: {
     position: "absolute",
-    top: 250,
-    left: 176,
-    width: 260,
-    height: 260,
+    top: 216,
+    left: 136,
+    width: 340,
+    height: 340,
     opacity: 0.1,
   },
   coverBlock: {
     alignItems: "center",
-    marginTop: 90,
+    marginTop: 40,
   },
   coverEyebrow: {
     fontSize: 12,
@@ -279,6 +279,7 @@ export default function ProposalPdfTemplate({ proposal }) {
       {/* Página 2 — Cuerpo y desglose */}
       <Page size="LETTER" style={styles.page}>
         <LetterheadHeader />
+        <Image src={logo} style={styles.watermark} fixed />
 
         <Text style={styles.intro}>
           Por medio de la presente sometemos a su consideración la oferta de
@@ -330,6 +331,7 @@ export default function ProposalPdfTemplate({ proposal }) {
       {/* Página 3 — Forma de pago y firma */}
       <Page size="LETTER" style={styles.page}>
         <LetterheadHeader />
+        <Image src={logo} style={styles.watermark} fixed />
 
         <Text style={styles.sectionHeading}>FORMA DE PAGO</Text>
 
