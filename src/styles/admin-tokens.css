@@ -123,12 +123,15 @@
   border-color: var(--color-primary-light);
 }
 
-/* Acciones secundarias: agregar línea, nueva propuesta, descargar */
+/* Acciones secundarias: agregar línea, nueva propuesta, descargar.
+   --color-border es casi blanco: sobre --color-surface (también blanco)
+   el botón desaparecía. Usa un borde con tinte de marca para que se
+   note que es un botón, no solo un borde suelto. */
 .admin-btn--secondary {
   background: var(--color-surface);
   color: var(--color-primary);
   border-width: var(--admin-border-md);
-  border-color: var(--color-border);
+  border-color: var(--color-primary-border);
 }
 
 .admin-btn--secondary:hover:not(:disabled) {

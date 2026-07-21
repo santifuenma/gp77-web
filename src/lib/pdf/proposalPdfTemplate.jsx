@@ -1,91 +1,177 @@
 import React from "react";
-import { Document, Page, View, Text, StyleSheet } from "@react-pdf/renderer";
+import { Document, Page, View, Text, Image, StyleSheet } from "@react-pdf/renderer";
+import logo from "../../assets/img/LogoGP.png";
 
-// Plantilla placeholder: estructura y datos correctos, sin diseño de marca
-// todavía. El formato visual final (logo, colores, tipografía) se aplica
-// después sobre este mismo componente.
+// Plantilla calcada del membrete real de GP77 (ver "Oferta de Servicios"
+// de Proyecto de Arquitectura y Diseño Interior): encabezado con razón
+// social + RIF, marca de agua del logo, bloque de portada centrado,
+// tabla de inversión con fila de total sombreada, y pie de página con
+// dirección/teléfonos en cada página.
+const COMPANY = {
+  name: "GERENCIA Y PROYECTOS 77, CA",
+  rif: "J-31734617-3",
+  address:
+    "Avenida Ppal de Los Cortijos. Centro Empresarial Senderos. Piso 3. Oficina 303-A",
+  phones: "Telfs. 0414-202.19.32 / 0414-160.03.05",
+};
+
+const SEVERITY_LABELS = { A: "Leve", B: "Moderada", C: "Grave" };
+
+const MESES = [
+  "enero", "febrero", "marzo", "abril", "mayo", "junio",
+  "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre",
+];
+
+const formatFecha = (date) =>
+  `Caracas, ${date.getDate()} de ${MESES[date.getMonth()]} de ${date.getFullYear()}`;
+
+const currency = (value) =>
+  `$${Number(value || 0).toLocaleString("es-VE", {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  })}`;
+
 const styles = StyleSheet.create({
   page: {
-    padding: 40,
-    fontSize: 11,
+    paddingTop: 50,
+    paddingBottom: 70,
+    paddingHorizontal: 50,
+    fontSize: 10.5,
     fontFamily: "Helvetica",
-    color: "#312f4e",
+    color: "#1a1a1a",
   },
-  title: {
-    fontSize: 18,
-    fontWeight: 700,
-    marginBottom: 4,
-  },
-  subtitle: {
-    fontSize: 10,
-    color: "#605e6b",
-    marginBottom: 24,
-  },
-  section: {
-    marginBottom: 20,
-  },
-  sectionTitle: {
-    fontSize: 12,
-    fontWeight: 700,
-    marginBottom: 6,
-    textTransform: "uppercase",
-    letterSpacing: 1,
-  },
-  row: {
+  header: {
     flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "flex-end",
+    marginBottom: 6,
+  },
+  headerName: {
+    fontSize: 13,
+    fontFamily: "Helvetica-Bold",
+    textDecoration: "underline",
+  },
+  headerRif: {
+    fontSize: 9,
+    color: "#444444",
+  },
+  watermark: {
+    position: "absolute",
+    top: 230,
+    left: 176,
+    width: 260,
+    height: 260,
+    opacity: 0.1,
+  },
+  coverBlock: {
+    alignItems: "center",
+    marginTop: 60,
+    marginBottom: 40,
+  },
+  coverEyebrow: {
+    fontSize: 12,
+    fontFamily: "Helvetica-Bold",
+    textAlign: "center",
+    marginBottom: 2,
+  },
+  coverTitle: {
+    fontSize: 13,
+    fontFamily: "Helvetica-Bold",
+    textAlign: "center",
+    marginBottom: 26,
+  },
+  coverClient: {
+    fontSize: 16,
+    fontFamily: "Helvetica-Bold",
+    textAlign: "center",
     marginBottom: 4,
   },
-  label: {
-    width: 120,
-    color: "#605e6b",
+  coverAddress: {
+    fontSize: 11,
+    textAlign: "center",
+    color: "#333333",
+    marginBottom: 30,
   },
-  value: {
-    flex: 1,
+  coverDate: {
+    fontSize: 10.5,
+    textAlign: "center",
+  },
+  intro: {
+    fontSize: 10.5,
+    lineHeight: 1.5,
+    marginBottom: 18,
+    textAlign: "justify",
+  },
+  sectionLabel: {
+    fontSize: 10.5,
+    marginBottom: 8,
   },
   table: {
-    marginTop: 8,
-    borderTop: "1pt solid #eef0f5",
+    borderWidth: 1,
+    borderColor: "#999999",
   },
-  tableHeader: {
+  tableHeaderRow: {
     flexDirection: "row",
-    borderBottom: "1pt solid #312f4e",
-    paddingVertical: 6,
-    fontWeight: 700,
+    backgroundColor: "#e8e8e8",
+    borderBottomWidth: 1,
+    borderBottomColor: "#999999",
   },
   tableRow: {
     flexDirection: "row",
-    borderBottom: "1pt solid #eef0f5",
-    paddingVertical: 6,
+    borderBottomWidth: 1,
+    borderBottomColor: "#cccccc",
   },
-  colSeverity: { width: "20%" },
-  colArea: { width: "25%", textAlign: "right" },
-  colRate: { width: "25%", textAlign: "right" },
-  colSubtotal: { width: "30%", textAlign: "right" },
-  totalRow: {
+  tableTotalRow: {
     flexDirection: "row",
-    justifyContent: "flex-end",
-    marginTop: 16,
-    paddingTop: 12,
-    borderTop: "2pt solid #312f4e",
+    backgroundColor: "#e8e8e8",
   },
+  th: {
+    padding: 7,
+    fontFamily: "Helvetica-Bold",
+    fontSize: 10,
+  },
+  td: {
+    padding: 7,
+    fontSize: 10,
+  },
+  colDetail: { width: "46%" },
+  colArea: { width: "14%", textAlign: "center" },
+  colRate: { width: "18%", textAlign: "right" },
+  colSubtotal: { width: "22%", textAlign: "right" },
   totalLabel: {
-    fontSize: 13,
-    fontWeight: 700,
-    marginRight: 8,
+    width: "78%",
+    padding: 7,
+    fontFamily: "Helvetica-Bold",
+    fontSize: 10.5,
+    textAlign: "right",
   },
   totalValue: {
-    fontSize: 13,
-    fontWeight: 700,
+    width: "22%",
+    padding: 7,
+    fontFamily: "Helvetica-Bold",
+    fontSize: 10.5,
+    textAlign: "right",
+  },
+  note: {
+    marginTop: 18,
+    fontSize: 9,
+    color: "#555555",
   },
   footer: {
-    marginTop: 40,
-    fontSize: 9,
-    color: "#8a8a97",
+    position: "absolute",
+    bottom: 30,
+    left: 50,
+    right: 50,
+    borderTopWidth: 1,
+    borderTopColor: "#999999",
+    paddingTop: 6,
+  },
+  footerText: {
+    fontSize: 8,
+    textAlign: "center",
+    color: "#444444",
   },
 });
-
-const currency = (value) =>
-  `$${Number(value).toLocaleString("es-VE", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
 
 export default function ProposalPdfTemplate({ proposal }) {
   const {
@@ -100,56 +186,70 @@ export default function ProposalPdfTemplate({ proposal }) {
 
   return (
     <Document>
-      <Page size="A4" style={styles.page}>
-        <Text style={styles.title}>Propuesta de Reparación de Grietas</Text>
-        <Text style={styles.subtitle}>
-          GP77 — Gerencia y Proyectos · {date.toLocaleDateString("es-VE")}
-        </Text>
-
-        <View style={styles.section}>
-          <Text style={styles.sectionTitle}>Datos del Cliente</Text>
-          <View style={styles.row}>
-            <Text style={styles.label}>Nombre</Text>
-            <Text style={styles.value}>{clientName}</Text>
-          </View>
-          <View style={styles.row}>
-            <Text style={styles.label}>Dirección</Text>
-            <Text style={styles.value}>{clientAddress}</Text>
-          </View>
+      <Page size="LETTER" style={styles.page}>
+        <View style={styles.header} fixed>
+          <Text style={styles.headerName}>{COMPANY.name}</Text>
+          <Text style={styles.headerRif}>{COMPANY.rif}</Text>
         </View>
 
-        <View style={styles.section}>
-          <Text style={styles.sectionTitle}>Desglose del Presupuesto</Text>
-          <View style={styles.table}>
-            <View style={styles.tableHeader}>
-              <Text style={styles.colSeverity}>Tipo</Text>
-              <Text style={styles.colArea}>m²</Text>
-              <Text style={styles.colRate}>Precio/m²</Text>
-              <Text style={styles.colSubtotal}>Subtotal</Text>
-            </View>
+        <Image src={logo} style={styles.watermark} fixed />
 
-            {items.map((item, index) => (
-              <View style={styles.tableRow} key={index}>
-                <Text style={styles.colSeverity}>
-                  {item.label ? `${item.severity} — ${item.label}` : item.severity}
-                </Text>
-                <Text style={styles.colArea}>{item.area_m2}</Text>
-                <Text style={styles.colRate}>{currency(item.rate_snapshot)}</Text>
-                <Text style={styles.colSubtotal}>{currency(item.subtotal)}</Text>
-              </View>
-            ))}
+        <View style={styles.coverBlock}>
+          <Text style={styles.coverEyebrow}>OFERTA DE SERVICIOS</Text>
+          <Text style={styles.coverTitle}>REPARACIÓN DE GRIETAS</Text>
+          <Text style={styles.coverClient}>{clientName}</Text>
+          <Text style={styles.coverAddress}>{clientAddress}</Text>
+          <Text style={styles.coverDate}>{formatFecha(date)}</Text>
+        </View>
+
+        <Text style={styles.intro}>
+          Por medio de la presente sometemos a su consideración la oferta de
+          servicios para la reparación de grietas detectadas en el inmueble
+          de {clientName}, ubicado en {clientAddress}. Esta oferta comprende
+          el diagnóstico y presupuesto de reparación de las grietas
+          evaluadas, clasificadas según su nivel de severidad, con el
+          desglose de costos correspondiente.
+        </Text>
+
+        <Text style={styles.sectionLabel}>
+          La inversión para la realización del servicio es:
+        </Text>
+
+        <View style={styles.table}>
+          <View style={styles.tableHeaderRow}>
+            <Text style={[styles.th, styles.colDetail]}>Tipo de grieta</Text>
+            <Text style={[styles.th, styles.colArea]}>m²</Text>
+            <Text style={[styles.th, styles.colRate]}>Precio/m²</Text>
+            <Text style={[styles.th, styles.colSubtotal]}>Subtotal</Text>
           </View>
 
-          <View style={styles.totalRow}>
+          {items.map((item, index) => (
+            <View style={styles.tableRow} key={index}>
+              <Text style={[styles.td, styles.colDetail]}>
+                {item.severity} — {item.label || SEVERITY_LABELS[item.severity] || ""}
+              </Text>
+              <Text style={[styles.td, styles.colArea]}>{item.area_m2}</Text>
+              <Text style={[styles.td, styles.colRate]}>{currency(item.rate_snapshot)}</Text>
+              <Text style={[styles.td, styles.colSubtotal]}>{currency(item.subtotal)}</Text>
+            </View>
+          ))}
+
+          <View style={styles.tableTotalRow}>
             <Text style={styles.totalLabel}>Total</Text>
             <Text style={styles.totalValue}>{currency(total)}</Text>
           </View>
         </View>
 
-        <Text style={styles.footer}>
-          Presupuesto generado automáticamente por el sistema interno de GP77.
-          Los montos están sujetos a verificación en sitio.
+        <Text style={styles.note}>
+          Presupuesto sujeto a verificación en sitio. Los montos pueden variar
+          según las condiciones reales del inmueble al momento de la
+          intervención.
         </Text>
+
+        <View style={styles.footer} fixed>
+          <Text style={styles.footerText}>Dirección: {COMPANY.address}</Text>
+          <Text style={styles.footerText}>{COMPANY.phones}</Text>
+        </View>
       </Page>
     </Document>
   );
