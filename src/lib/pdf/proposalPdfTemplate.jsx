@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
     paddingBottom: 70,
     paddingHorizontal: 50,
     fontSize: 10.5,
-    lineHeight: 1.35,
+    lineHeight: 1.5,
     fontFamily: "Helvetica",
     color: "#1a1a1a",
   },
@@ -72,7 +72,7 @@ const styles = StyleSheet.create({
     fontSize: 8,
     textAlign: "center",
     color: "#444444",
-    lineHeight: 1.4,
+    lineHeight: 1.5,
   },
 
   /* --- Marca de agua: se repite en las 3 páginas, no solo la portada --- */
@@ -93,14 +93,14 @@ const styles = StyleSheet.create({
     fontFamily: "Helvetica-Bold",
     textAlign: "center",
     letterSpacing: 0.5,
-    lineHeight: 1.3,
+    lineHeight: 1.5,
   },
   coverTitle: {
     fontSize: 12,
     fontFamily: "Helvetica-Bold",
     textAlign: "center",
     letterSpacing: 0.5,
-    lineHeight: 1.3,
+    lineHeight: 1.5,
     marginBottom: 60,
   },
   coverClient: {
@@ -123,7 +123,7 @@ const styles = StyleSheet.create({
   /* --- Cuerpo / tabla --- */
   intro: {
     fontSize: 10.5,
-    lineHeight: 1.6,
+    lineHeight: 1.5,
     marginBottom: 20,
     textAlign: "justify",
   },
@@ -159,7 +159,7 @@ const styles = StyleSheet.create({
   td: {
     padding: 8,
     fontSize: 10,
-    lineHeight: 1.3,
+    lineHeight: 1.5,
   },
   colDetail: { width: "46%" },
   colArea: { width: "14%", textAlign: "center" },
@@ -196,18 +196,18 @@ const styles = StyleSheet.create({
   },
   termParagraph: {
     fontSize: 10.5,
-    lineHeight: 1.6,
+    lineHeight: 1.5,
     marginBottom: 8,
   },
   termNote: {
     fontSize: 10,
-    lineHeight: 1.6,
+    lineHeight: 1.5,
     fontFamily: "Helvetica-Oblique",
     marginTop: 14,
   },
   closing: {
     fontSize: 10.5,
-    lineHeight: 1.6,
+    lineHeight: 1.5,
     marginTop: 30,
   },
   signatureBlock: {
