@@ -174,9 +174,21 @@ y `.pcalc__error`).
 <p class="alert-error">Este campo es obligatorio.</p>
 ```
 
+## 9. Sección `/admin`
+
+El panel interno de arquitectos (`/admin/*`, ver `src/layouts/AdminLayout.jsx`)
+reutiliza exactamente los mismos tokens y clases de esta guía — no tiene su
+propio sistema de diseño. Cada pantalla nueva del admin (Generador de
+Propuestas, Tarifas, y las que se agreguen después) sigue el mismo patrón:
+`.card` para contenedores, `.btn-pill`/`.form-input`/`.alert-error` para
+formularios, `.section-title`/`.section-lead` para encabezados, con su propio
+archivo `.css` junto al componente para lo específico de esa pantalla (igual
+que el resto del sitio). Ver `src/components/admin/ProposalForm/ProposalForm.css`
+como ejemplo de una pantalla mobile-first construida sobre esta base.
+
 ---
 
-## 9. Reglas de uso
+## 10. Reglas de uso
 
 1. Antes de escribir un color, radio, sombra o fuente nuevo, revisa si ya
    existe un token equivalente arriba.

@@ -1,0 +1,45 @@
+.admin-hub__title {
+  margin-top: 0;
+  text-align: left;
+}
+
+.admin-hub__lead {
+  text-align: left;
+  margin: 8px 0 0 0;
+  max-width: none;
+}
+
+.admin-hub__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 16px;
+  margin-top: 24px;
+}
+
+.admin-hub__tile {
+  display: block;
+  padding: 20px;
+  text-decoration: none;
+  transition: var(--transition-base);
+}
+
+.admin-hub__tile:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-lg);
+}
+
+.admin-hub__tile-title {
+  font-family: var(--font-primary);
+  color: var(--color-primary);
+  font-weight: var(--fw-semibold);
+  font-size: 1.1rem;
+  margin: 0 0 8px 0;
+}
+
+.admin-hub__tile-desc {
+  font-family: var(--font-primary);
+  color: var(--color-text-soft);
+  font-size: 0.9rem;
+  line-height: 1.5;
+  margin: 0;
+}

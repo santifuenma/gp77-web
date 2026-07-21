@@ -1,0 +1,10 @@
+.tarifas-page__title {
+  text-align: left;
+  margin: 0;
+}
+
+.tarifas-page__lead {
+  text-align: left;
+  margin: 8px 0 24px 0;
+  max-width: none;
+}

@@ -1,0 +1,95 @@
+.propuestas-page__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+}
+
+.propuestas-page__title {
+  margin: 0;
+  text-align: left;
+}
+
+.propuestas-page__new {
+  white-space: nowrap;
+  height: 42px;
+  padding: 0 20px;
+  font-size: 0.9rem;
+  text-decoration: none;
+}
+
+.propuestas-page__empty {
+  font-family: var(--font-primary);
+  color: var(--color-text-soft);
+  text-align: center;
+  padding: 40px 0;
+}
+
+.propuestas-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.propuesta-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 16px;
+  flex-wrap: wrap;
+}
+
+.propuesta-card__info {
+  min-width: 0;
+}
+
+.propuesta-card__client {
+  font-family: var(--font-primary);
+  color: var(--color-primary);
+  font-weight: var(--fw-semibold);
+  font-size: 1rem;
+  margin: 0 0 4px 0;
+}
+
+.propuesta-card__meta {
+  font-family: var(--font-primary);
+  color: var(--color-text-soft);
+  font-size: 0.85rem;
+  margin: 0;
+}
+
+.propuesta-card__right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.propuesta-card__total {
+  font-family: var(--font-primary);
+  color: var(--color-primary);
+  font-weight: var(--fw-bold);
+  font-size: 1.05rem;
+  white-space: nowrap;
+}
+
+.propuesta-card__download {
+  height: 38px;
+  padding: 0 16px;
+  font-size: 0.8rem;
+  white-space: nowrap;
+}
+
+@media (max-width: 600px) {
+  .propuesta-card {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .propuesta-card__right {
+    width: 100%;
+    justify-content: space-between;
+  }
+}

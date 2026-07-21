@@ -8,7 +8,13 @@
     "type": "git",
     "url": "https://github.com/santifuenma/gp77-web.git"
   },
-  "keywords": ["react", "vite", "framer-motion", "gsap", "architecture-website"],
+  "keywords": [
+    "react",
+    "vite",
+    "framer-motion",
+    "gsap",
+    "architecture-website"
+  ],
   "private": true,
   "scripts": {
     "dev": "vite --host",
@@ -22,6 +28,8 @@
     "@mui/icons-material": "^7.3.2",
     "@mui/material": "^7.3.2",
     "@neondatabase/serverless": "^1.0.1",
+    "@react-pdf/renderer": "^4.5.1",
+    "@supabase/supabase-js": "^2.110.8",
     "framer-motion": "^12.23.16",
     "gsap": "^3.13.0",
     "lenis": "^1.3.17",

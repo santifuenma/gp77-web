@@ -3,8 +3,6 @@ import SmoothScroll from "./components/SmoothScroll";
 import React, { Suspense } from "react";
 import { BrowserRouter as Router } from "react-router-dom";
 import { HelmetProvider } from "react-helmet-async";
-import Navbar from "./components/Navbar/Navbar";
-import Footer from "./components/Footer/Footer";
 import AnimatedRoutes from "./components/AnimatedRoutes/AnimatedRoutes";
 import "./styles/main.css";
 
@@ -33,11 +31,9 @@ function App() {
       <Router>
         <ScrollToTop />
         <SmoothScroll />
-        <Navbar />
         <Suspense fallback={<LoadingFallback />}>
           <AnimatedRoutes />
         </Suspense>
-        <Footer />
       </Router>
     </HelmetProvider>
   );
