@@ -46,17 +46,18 @@ export default function Propuestas() {
         </Link>
       </div>
 
-      {loading && <p className="propuestas-page__empty">Cargando…</p>}
+      <div className="admin-panel admin-panel--flush propuestas-list">
+        {loading && <p className="propuestas-page__empty">Cargando…</p>}
 
-      {!loading && proposals.length === 0 && (
-        <p className="propuestas-page__empty">
-          Aún no has generado ninguna propuesta.
-        </p>
-      )}
+        {!loading && proposals.length === 0 && (
+          <p className="propuestas-page__empty">
+            Aún no has generado ninguna propuesta.
+          </p>
+        )}
 
-      {!loading && proposals.length > 0 && (
-        <div className="propuestas-list">
-          {proposals.map((proposal) => (
+        {!loading &&
+          proposals.length > 0 &&
+          proposals.map((proposal) => (
             <div key={proposal.id} className="propuesta-row">
               <div className="propuesta-row__info">
                 <p className="propuesta-row__client">{proposal.client_name}</p>
@@ -78,8 +79,7 @@ export default function Propuestas() {
               </div>
             </div>
           ))}
-        </div>
-      )}
+      </div>
     </div>
   );
 }

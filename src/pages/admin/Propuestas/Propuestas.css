@@ -12,11 +12,7 @@
   font-size: var(--admin-fs-base);
   color: var(--color-text-soft);
   text-align: center;
-  padding: 48px 0;
-}
-
-.propuestas-list {
-  border-top: var(--admin-border-thin) solid var(--color-border);
+  padding: 40px 20px;
 }
 
 .propuesta-row {
@@ -24,9 +20,13 @@
   align-items: center;
   justify-content: space-between;
   gap: 12px;
-  padding: 14px 4px;
+  padding: 14px 20px;
   border-bottom: var(--admin-border-thin) solid var(--color-border);
   flex-wrap: wrap;
+}
+
+.propuesta-row:last-child {
+  border-bottom: none;
 }
 
 .propuesta-row__info {
@@ -71,6 +71,7 @@
   .propuesta-row {
     flex-direction: column;
     align-items: flex-start;
+    padding: 14px 16px;
   }
 
   .propuesta-row__right {

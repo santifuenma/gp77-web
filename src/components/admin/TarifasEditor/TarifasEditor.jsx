@@ -36,15 +36,23 @@ export default function TarifasEditor() {
   };
 
   if (loading) {
-    return <p className="tarifas-editor__status">Cargando tarifas…</p>;
+    return (
+      <div className="admin-panel">
+        <p className="tarifas-editor__status">Cargando tarifas…</p>
+      </div>
+    );
   }
 
   if (error) {
-    return <p className="alert-error">No se pudieron cargar las tarifas.</p>;
+    return (
+      <div className="admin-panel">
+        <p className="alert-error">No se pudieron cargar las tarifas.</p>
+      </div>
+    );
   }
 
   return (
-    <div className="tarifas-editor">
+    <div className="admin-panel admin-panel--flush tarifas-editor">
       {rates.map((rate) => (
         <div key={rate.severity} className="tarifas-editor__row">
           <div className="tarifas-editor__info">

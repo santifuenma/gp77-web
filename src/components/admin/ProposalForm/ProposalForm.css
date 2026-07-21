@@ -1,7 +1,7 @@
 .proposal-form {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 18px;
 }
 
 .proposal-form__client {
@@ -13,20 +13,17 @@
 .proposal-form__items {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  border-top: var(--admin-border-thin) solid var(--color-border);
 }
 
-/* --- Línea de grieta: mobile-first, mini-tarjeta apilada --- */
+/* --- Línea de grieta: separada por línea divisoria, no su propia caja --- */
 .line-item {
   position: relative;
   display: flex;
   flex-direction: column;
   gap: 10px;
-  background: var(--color-surface);
-  border: var(--admin-border-thin) solid var(--color-border);
-  border-radius: var(--admin-radius);
-  padding: 14px;
-  padding-right: 46px;
+  padding: 14px 46px 14px 0;
+  border-bottom: var(--admin-border-thin) solid var(--color-border);
 }
 
 .line-item__field {
@@ -51,8 +48,6 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding-top: 8px;
-  border-top: var(--admin-border-thin) solid var(--color-border);
 }
 
 .line-item__subtotal-value {
@@ -64,13 +59,14 @@
 
 .line-item__remove {
   position: absolute;
-  top: 8px;
-  right: 8px;
+  top: 14px;
+  right: 0;
 }
 
 /* --- Botones de acción de formulario --- */
 .proposal-form__add {
   align-self: flex-start;
+  margin-top: 4px;
 }
 
 .proposal-form__total {
@@ -79,7 +75,7 @@
   justify-content: space-between;
   padding: 14px 16px;
   background: var(--color-primary-tint-bg);
-  border-radius: var(--admin-radius);
+  border-radius: var(--admin-radius-sm);
   font-family: var(--font-primary);
   color: var(--color-primary);
   font-size: var(--admin-fs-base);
@@ -103,8 +99,7 @@
   .line-item {
     flex-direction: row;
     align-items: center;
-    padding: 10px 14px;
-    padding-right: 14px;
+    padding: 10px 46px 10px 0;
   }
 
   .line-item__field {
@@ -128,15 +123,8 @@
 
   .line-item__subtotal {
     flex: 1;
-    border-top: none;
-    padding-top: 0;
     justify-content: flex-end;
     gap: 10px;
-  }
-
-  .line-item__remove {
-    position: static;
-    margin-left: 4px;
   }
 
   .proposal-form__submit {

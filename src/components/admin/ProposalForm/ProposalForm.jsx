@@ -107,7 +107,7 @@ export default function ProposalForm() {
   };
 
   return (
-    <form className="proposal-form" onSubmit={onSubmit}>
+    <form className="admin-panel proposal-form" onSubmit={onSubmit}>
       <div className="proposal-form__client">
         <input
           className="admin-input"
