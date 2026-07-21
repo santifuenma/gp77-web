@@ -2,11 +2,11 @@ import React from "react";
 import { Document, Page, View, Text, Image, StyleSheet } from "@react-pdf/renderer";
 import logo from "../../assets/img/LogoGP.png";
 
-// Plantilla calcada del membrete real de GP77 (ver "Oferta de Servicios"
-// de Proyecto de Arquitectura y Diseño Interior): encabezado con razón
-// social + RIF, marca de agua del logo, bloque de portada centrado,
-// tabla de inversión con fila de total sombreada, y pie de página con
-// dirección/teléfonos en cada página.
+// Plantilla calcada del membrete real de GP77 ("Oferta de Servicios" de
+// Proyecto de Arquitectura y Diseño Interior): 3 páginas — portada, cuerpo
+// con tabla de inversión, y términos de pago con firma — con el mismo
+// encabezado (razón social + RIF), marca de agua del logo, y pie de
+// página con dirección/teléfonos repetidos en cada página.
 const COMPANY = {
   name: "GERENCIA Y PROYECTOS 77, CA",
   rif: "J-31734617-3",
@@ -37,6 +37,7 @@ const styles = StyleSheet.create({
     paddingBottom: 70,
     paddingHorizontal: 50,
     fontSize: 10.5,
+    lineHeight: 1.35,
     fontFamily: "Helvetica",
     color: "#1a1a1a",
   },
@@ -50,14 +51,32 @@ const styles = StyleSheet.create({
     fontSize: 13,
     fontFamily: "Helvetica-Bold",
     textDecoration: "underline",
+    letterSpacing: 0.3,
   },
   headerRif: {
     fontSize: 9,
     color: "#444444",
   },
+  footer: {
+    position: "absolute",
+    bottom: 30,
+    left: 50,
+    right: 50,
+    borderTopWidth: 1,
+    borderTopColor: "#999999",
+    paddingTop: 6,
+  },
+  footerText: {
+    fontSize: 8,
+    textAlign: "center",
+    color: "#444444",
+    lineHeight: 1.4,
+  },
+
+  /* --- Portada --- */
   watermark: {
     position: "absolute",
-    top: 230,
+    top: 250,
     left: 176,
     width: 260,
     height: 260,
@@ -65,20 +84,22 @@ const styles = StyleSheet.create({
   },
   coverBlock: {
     alignItems: "center",
-    marginTop: 60,
-    marginBottom: 40,
+    marginTop: 90,
   },
   coverEyebrow: {
     fontSize: 12,
     fontFamily: "Helvetica-Bold",
     textAlign: "center",
-    marginBottom: 2,
+    letterSpacing: 0.5,
+    lineHeight: 1.3,
   },
   coverTitle: {
-    fontSize: 13,
+    fontSize: 12,
     fontFamily: "Helvetica-Bold",
     textAlign: "center",
-    marginBottom: 26,
+    letterSpacing: 0.5,
+    lineHeight: 1.3,
+    marginBottom: 60,
   },
   coverClient: {
     fontSize: 16,
@@ -90,21 +111,23 @@ const styles = StyleSheet.create({
     fontSize: 11,
     textAlign: "center",
     color: "#333333",
-    marginBottom: 30,
   },
   coverDate: {
     fontSize: 10.5,
     textAlign: "center",
+    marginTop: 140,
   },
+
+  /* --- Cuerpo / tabla --- */
   intro: {
     fontSize: 10.5,
-    lineHeight: 1.5,
-    marginBottom: 18,
+    lineHeight: 1.6,
+    marginBottom: 20,
     textAlign: "justify",
   },
   sectionLabel: {
     fontSize: 10.5,
-    marginBottom: 8,
+    marginBottom: 10,
   },
   table: {
     borderWidth: 1,
@@ -126,13 +149,15 @@ const styles = StyleSheet.create({
     backgroundColor: "#e8e8e8",
   },
   th: {
-    padding: 7,
+    padding: 8,
     fontFamily: "Helvetica-Bold",
     fontSize: 10,
+    letterSpacing: 0.2,
   },
   td: {
-    padding: 7,
+    padding: 8,
     fontSize: 10,
+    lineHeight: 1.3,
   },
   colDetail: { width: "46%" },
   colArea: { width: "14%", textAlign: "center" },
@@ -140,14 +165,14 @@ const styles = StyleSheet.create({
   colSubtotal: { width: "22%", textAlign: "right" },
   totalLabel: {
     width: "78%",
-    padding: 7,
+    padding: 8,
     fontFamily: "Helvetica-Bold",
     fontSize: 10.5,
     textAlign: "right",
   },
   totalValue: {
     width: "22%",
-    padding: 7,
+    padding: 8,
     fontFamily: "Helvetica-Bold",
     fontSize: 10.5,
     textAlign: "right",
@@ -155,23 +180,68 @@ const styles = StyleSheet.create({
   note: {
     marginTop: 18,
     fontSize: 9,
+    lineHeight: 1.5,
     color: "#555555",
   },
-  footer: {
-    position: "absolute",
-    bottom: 30,
-    left: 50,
-    right: 50,
+
+  /* --- Términos y firma --- */
+  sectionHeading: {
+    fontSize: 11,
+    fontFamily: "Helvetica-Bold",
+    letterSpacing: 0.3,
+    marginTop: 22,
+    marginBottom: 10,
+  },
+  termParagraph: {
+    fontSize: 10.5,
+    lineHeight: 1.6,
+    marginBottom: 8,
+  },
+  termNote: {
+    fontSize: 10,
+    lineHeight: 1.6,
+    fontFamily: "Helvetica-Oblique",
+    marginTop: 14,
+  },
+  closing: {
+    fontSize: 10.5,
+    lineHeight: 1.6,
+    marginTop: 30,
+  },
+  signatureBlock: {
+    marginTop: 90,
+    alignItems: "center",
+  },
+  signatureLine: {
+    width: 240,
     borderTopWidth: 1,
-    borderTopColor: "#999999",
+    borderTopColor: "#1a1a1a",
     paddingTop: 6,
   },
-  footerText: {
-    fontSize: 8,
+  signatureName: {
+    fontSize: 10.5,
+    fontFamily: "Helvetica-Bold",
     textAlign: "center",
-    color: "#444444",
   },
 });
+
+function LetterheadHeader() {
+  return (
+    <View style={styles.header} fixed>
+      <Text style={styles.headerName}>{COMPANY.name}</Text>
+      <Text style={styles.headerRif}>{COMPANY.rif}</Text>
+    </View>
+  );
+}
+
+function LetterheadFooter() {
+  return (
+    <View style={styles.footer} fixed>
+      <Text style={styles.footerText}>Dirección: {COMPANY.address}</Text>
+      <Text style={styles.footerText}>{COMPANY.phones}</Text>
+    </View>
+  );
+}
 
 export default function ProposalPdfTemplate({ proposal }) {
   const {
@@ -186,21 +256,29 @@ export default function ProposalPdfTemplate({ proposal }) {
 
   return (
     <Document>
+      {/* Página 1 — Portada */}
       <Page size="LETTER" style={styles.page}>
-        <View style={styles.header} fixed>
-          <Text style={styles.headerName}>{COMPANY.name}</Text>
-          <Text style={styles.headerRif}>{COMPANY.rif}</Text>
-        </View>
+        <LetterheadHeader />
 
         <Image src={logo} style={styles.watermark} fixed />
 
         <View style={styles.coverBlock}>
           <Text style={styles.coverEyebrow}>OFERTA DE SERVICIOS</Text>
+          <Text style={styles.coverEyebrow}>SERVICIO DE</Text>
           <Text style={styles.coverTitle}>REPARACIÓN DE GRIETAS</Text>
+
           <Text style={styles.coverClient}>{clientName}</Text>
           <Text style={styles.coverAddress}>{clientAddress}</Text>
+
           <Text style={styles.coverDate}>{formatFecha(date)}</Text>
         </View>
+
+        <LetterheadFooter />
+      </Page>
+
+      {/* Página 2 — Cuerpo y desglose */}
+      <Page size="LETTER" style={styles.page}>
+        <LetterheadHeader />
 
         <Text style={styles.intro}>
           Por medio de la presente sometemos a su consideración la oferta de
@@ -246,10 +324,40 @@ export default function ProposalPdfTemplate({ proposal }) {
           intervención.
         </Text>
 
-        <View style={styles.footer} fixed>
-          <Text style={styles.footerText}>Dirección: {COMPANY.address}</Text>
-          <Text style={styles.footerText}>{COMPANY.phones}</Text>
+        <LetterheadFooter />
+      </Page>
+
+      {/* Página 3 — Forma de pago y firma */}
+      <Page size="LETTER" style={styles.page}>
+        <LetterheadHeader />
+
+        <Text style={styles.sectionHeading}>FORMA DE PAGO</Text>
+
+        <Text style={styles.termParagraph}>Anticipo:</Text>
+        <Text style={styles.termParagraph}>
+          70% cancelado a la aprobación de la oferta para iniciar las
+          actividades.
+        </Text>
+
+        <Text style={styles.termParagraph}>Pago Final:</Text>
+        <Text style={styles.termParagraph}>
+          30% cancelado a la entrega del servicio.
+        </Text>
+
+        <Text style={styles.termNote}>
+          Recibimos el pago en divisas en efectivo, Zelle, USDT, Binance o
+          Bolívares a tasa establecida por Gerencia y Proyectos 77.
+        </Text>
+
+        <Text style={styles.closing}>Sin más y a la espera de su pronta respuesta,</Text>
+
+        <View style={styles.signatureBlock}>
+          <View style={styles.signatureLine}>
+            <Text style={styles.signatureName}>Gerencia y Proyectos 77, C.A.</Text>
+          </View>
         </View>
+
+        <LetterheadFooter />
       </Page>
     </Document>
   );
