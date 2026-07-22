@@ -147,7 +147,7 @@
     flex: 0.8;
   }
 
-  .line-item__label {
+  .line-item .line-item__label {
     width: 90px;
     flex-shrink: 0;
   }
