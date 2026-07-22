@@ -83,6 +83,7 @@
    BOTONES — jerarquía real en vez de un solo estilo "píldora" repetido
    ========================================================================== */
 .admin-btn {
+  box-sizing: border-box;
   display: inline-flex;
   align-items: center;
   justify-content: center;

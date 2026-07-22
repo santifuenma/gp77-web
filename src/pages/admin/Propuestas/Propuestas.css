@@ -179,4 +179,11 @@
   .propuesta-row__edit--desktop {
     display: none;
   }
+
+  /* "PDF" es más corto que "Editar" y quedaba más angosto aunque ambos
+     ya alinean por la derecha; iguala el ancho para que se vean parejos. */
+  .propuesta-row__edit--mobile,
+  .propuesta-row__download {
+    min-width: 70px;
+  }
 }
