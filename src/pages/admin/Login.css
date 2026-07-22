@@ -50,6 +50,12 @@
   border-radius: var(--admin-radius);
 }
 
+@media (max-width: 600px) {
+  .admin-login__card {
+    padding: 40px 24px 32px;
+  }
+}
+
 .admin-login__title {
   font-family: var(--font-primary);
   color: var(--color-primary);
