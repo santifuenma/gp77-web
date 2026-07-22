@@ -69,6 +69,31 @@
   margin-top: 4px;
 }
 
+/* --- Semanas de ejecución --- */
+.proposal-form__execution {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 14px 0;
+  border-top: var(--admin-border-thin) solid var(--color-border);
+}
+
+.proposal-form__execution-field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.proposal-form__weeks {
+  height: 38px;
+}
+
+.proposal-form__execution-subtotal {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
 .proposal-form__total {
   display: flex;
   align-items: center;
@@ -122,6 +147,32 @@
   }
 
   .line-item__subtotal {
+    flex: 1;
+    justify-content: flex-end;
+    gap: 10px;
+  }
+
+  .proposal-form__execution {
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .proposal-form__execution-field {
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .proposal-form__execution-field .line-item__label {
+    width: 90px;
+    flex-shrink: 0;
+  }
+
+  .proposal-form__weeks {
+    max-width: 120px;
+  }
+
+  .proposal-form__execution-subtotal {
     flex: 1;
     justify-content: flex-end;
     gap: 10px;

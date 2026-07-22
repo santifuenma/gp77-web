@@ -5,14 +5,24 @@ import { supabase, isSupabaseConfigured } from "./supabaseClient";
 // probar la UI antes de tener un proyecto de Supabase real.
 let mockProposals = [];
 
-export async function createProposal({ clientName, clientAddress, items }) {
+export async function createProposal({
+  clientName,
+  clientAddress,
+  items,
+  executionWeeks = 0,
+  executionRate = 0,
+  executionSubtotal = 0,
+}) {
   if (!isSupabaseConfigured) {
-    const total = items.reduce((sum, item) => sum + item.subtotal, 0);
+    const itemsTotal = items.reduce((sum, item) => sum + item.subtotal, 0);
     const proposal = {
       id: `mock-${Date.now()}`,
       client_name: clientName,
       client_address: clientAddress,
-      total,
+      total: itemsTotal + executionSubtotal,
+      execution_weeks: executionWeeks,
+      execution_rate_snapshot: executionRate,
+      execution_subtotal: executionSubtotal,
       created_at: new Date().toISOString(),
       items,
     };
@@ -27,6 +37,7 @@ export async function createProposal({ clientName, clientAddress, items }) {
       severity: item.severity,
       area_m2: item.area_m2,
     })),
+    p_execution_weeks: executionWeeks,
   });
 
   return { data, error };

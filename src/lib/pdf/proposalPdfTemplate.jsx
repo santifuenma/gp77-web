@@ -31,6 +31,17 @@ const currency = (value) =>
     maximumFractionDigits: 2,
   })}`;
 
+// "semana" es femenino, de ahí "una"/"veintiuna" en vez de "uno"/"veintiuno".
+const WEEK_COUNT_WORDS = [
+  "", "una", "dos", "tres", "cuatro", "cinco", "seis", "siete", "ocho", "nueve", "diez",
+  "once", "doce", "trece", "catorce", "quince", "dieciséis", "diecisiete", "dieciocho", "diecinueve", "veinte",
+  "veintiuna", "veintidós", "veintitrés", "veinticuatro", "veinticinco", "veintiséis", "veintisiete", "veintiocho", "veintinueve", "treinta",
+];
+
+const weeksToWords = (weeks) => WEEK_COUNT_WORDS[Math.round(Number(weeks))] || String(weeks);
+
+const SIGNATORIES = ["Arq. Claudia Ruiz", "Arq. Adriana Ciliberto"];
+
 const styles = StyleSheet.create({
   page: {
     paddingTop: 50,
@@ -95,13 +106,16 @@ const styles = StyleSheet.create({
     letterSpacing: 0.5,
     lineHeight: 1.5,
   },
+  coverEyebrowFirst: {
+    marginTop: 40,
+  },
   coverTitle: {
     fontSize: 12,
     fontFamily: "Helvetica-Bold",
     textAlign: "center",
     letterSpacing: 0.5,
     lineHeight: 1.5,
-    marginBottom: 60,
+    marginBottom: 20,
   },
   coverClient: {
     fontSize: 16,
@@ -161,9 +175,9 @@ const styles = StyleSheet.create({
     fontSize: 10,
     lineHeight: 1.5,
   },
-  colDetail: { width: "46%" },
-  colArea: { width: "14%", textAlign: "center" },
-  colRate: { width: "18%", textAlign: "right" },
+  colDetail: { width: "36%" },
+  colArea: { width: "20%", textAlign: "center" },
+  colRate: { width: "22%", textAlign: "right" },
   colSubtotal: { width: "22%", textAlign: "right" },
   totalLabel: {
     width: "78%",
@@ -210,12 +224,17 @@ const styles = StyleSheet.create({
     lineHeight: 1.5,
     marginTop: 30,
   },
-  signatureBlock: {
+  signatureRow: {
+    flexDirection: "row",
+    justifyContent: "center",
+    gap: 50,
     marginTop: 90,
+  },
+  signatureBlock: {
     alignItems: "center",
   },
   signatureLine: {
-    width: 240,
+    width: 200,
     borderTopWidth: 1,
     borderTopColor: "#1a1a1a",
     paddingTop: 6,
@@ -252,6 +271,9 @@ export default function ProposalPdfTemplate({ proposal }) {
     total,
     created_at: createdAt,
     items = [],
+    execution_weeks: executionWeeks,
+    execution_rate_snapshot: executionRateSnapshot,
+    execution_subtotal: executionSubtotal,
   } = proposal;
 
   const date = createdAt ? new Date(createdAt) : new Date();
@@ -265,9 +287,9 @@ export default function ProposalPdfTemplate({ proposal }) {
         <Image src={logo} style={styles.watermark} fixed />
 
         <View style={styles.coverBlock}>
-          <Text style={styles.coverEyebrow}>OFERTA DE SERVICIOS</Text>
+          <Text style={[styles.coverEyebrow, styles.coverEyebrowFirst]}>OFERTA DE SERVICIOS</Text>
           <Text style={styles.coverEyebrow}>SERVICIO DE</Text>
-          <Text style={styles.coverTitle}>REPARACIÓN DE GRIETAS</Text>
+          <Text style={styles.coverTitle}>REPARACIONES GENERALES</Text>
 
           <Text style={styles.coverClient}>{clientName}</Text>
           <Text style={styles.coverAddress}>{clientAddress}</Text>
@@ -284,12 +306,13 @@ export default function ProposalPdfTemplate({ proposal }) {
         <Image src={logo} style={styles.watermark} fixed />
 
         <Text style={styles.intro}>
-          Por medio de la presente sometemos a su consideración la oferta de
-          servicios para la reparación de grietas detectadas en el inmueble
-          de {clientName}, ubicado en {clientAddress}. Esta oferta comprende
-          el diagnóstico y presupuesto de reparación de las grietas
-          evaluadas, clasificadas según su nivel de severidad, con el
-          desglose de costos correspondiente.
+          Por medio de la presente sometemos a su consideración nuestra oferta
+          de servicios para la ejecución de los trabajos de reparación
+          requeridos en el inmueble de {clientName}, ubicado en{" "}
+          {clientAddress}. La presente propuesta contempla el diagnóstico, el
+          alcance de la intervención y el presupuesto correspondiente,
+          clasificado según el nivel de severidad de cada zona evaluada, con
+          el desglose de costos respectivo.
         </Text>
 
         <Text style={styles.sectionLabel}>
@@ -298,9 +321,9 @@ export default function ProposalPdfTemplate({ proposal }) {
 
         <View style={styles.table}>
           <View style={styles.tableHeaderRow}>
-            <Text style={[styles.th, styles.colDetail]}>Tipo de grieta</Text>
-            <Text style={[styles.th, styles.colArea]}>m²</Text>
-            <Text style={[styles.th, styles.colRate]}>Precio/m²</Text>
+            <Text style={[styles.th, styles.colDetail]}>Detalle</Text>
+            <Text style={[styles.th, styles.colArea]}>Cantidad</Text>
+            <Text style={[styles.th, styles.colRate]}>Precio unitario</Text>
             <Text style={[styles.th, styles.colSubtotal]}>Subtotal</Text>
           </View>
 
@@ -309,11 +332,24 @@ export default function ProposalPdfTemplate({ proposal }) {
               <Text style={[styles.td, styles.colDetail]}>
                 {item.severity} — {item.label || SEVERITY_LABELS[item.severity] || ""}
               </Text>
-              <Text style={[styles.td, styles.colArea]}>{item.area_m2}</Text>
-              <Text style={[styles.td, styles.colRate]}>{currency(item.rate_snapshot)}</Text>
+              <Text style={[styles.td, styles.colArea]}>{`${item.area_m2} m²`}</Text>
+              <Text style={[styles.td, styles.colRate]}>{`${currency(item.rate_snapshot)}/m²`}</Text>
               <Text style={[styles.td, styles.colSubtotal]}>{currency(item.subtotal)}</Text>
             </View>
           ))}
+
+          {Number(executionWeeks) > 0 && (
+            <View style={styles.tableRow}>
+              <Text style={[styles.td, styles.colDetail]}>Semanas de ejecución</Text>
+              <Text style={[styles.td, styles.colArea]}>
+                {`${executionWeeks} semana${Math.round(executionWeeks) === 1 ? "" : "s"}`}
+              </Text>
+              <Text style={[styles.td, styles.colRate]}>
+                {`${currency(executionRateSnapshot)}/semana`}
+              </Text>
+              <Text style={[styles.td, styles.colSubtotal]}>{currency(executionSubtotal)}</Text>
+            </View>
+          )}
 
           <View style={styles.tableTotalRow}>
             <Text style={styles.totalLabel}>Total</Text>
@@ -335,6 +371,19 @@ export default function ProposalPdfTemplate({ proposal }) {
         <LetterheadHeader />
         <Image src={logo} style={styles.watermark} fixed />
 
+        {Number(executionWeeks) > 0 && (
+          <>
+            <Text style={styles.sectionHeading}>TIEMPO DE EJECUCIÓN</Text>
+            <Text style={styles.termParagraph}>
+              {`Se ha estimado para la ejecución del Proyecto, ${weeksToWords(
+                executionWeeks
+              )} (${Math.round(executionWeeks)}) semana${
+                Math.round(executionWeeks) === 1 ? "" : "s"
+              }.`}
+            </Text>
+          </>
+        )}
+
         <Text style={styles.sectionHeading}>FORMA DE PAGO</Text>
 
         <Text style={styles.termParagraph}>Anticipo:</Text>
@@ -355,10 +404,14 @@ export default function ProposalPdfTemplate({ proposal }) {
 
         <Text style={styles.closing}>Sin más y a la espera de su pronta respuesta,</Text>
 
-        <View style={styles.signatureBlock}>
-          <View style={styles.signatureLine}>
-            <Text style={styles.signatureName}>Gerencia y Proyectos 77, C.A.</Text>
-          </View>
+        <View style={styles.signatureRow}>
+          {SIGNATORIES.map((name) => (
+            <View style={styles.signatureBlock} key={name}>
+              <View style={styles.signatureLine}>
+                <Text style={styles.signatureName}>{name}</Text>
+              </View>
+            </View>
+          ))}
         </View>
 
         <LetterheadFooter />

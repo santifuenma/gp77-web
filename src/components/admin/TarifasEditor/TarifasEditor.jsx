@@ -1,12 +1,22 @@
 import React, { useEffect, useState } from "react";
 import { useCrackRates } from "../../../hooks/admin/useCrackRates";
+import { useExecutionRate } from "../../../hooks/admin/useExecutionRate";
 import "./TarifasEditor.css";
 
 export default function TarifasEditor() {
   const { rates, loading, error, updateRate } = useCrackRates();
+  const {
+    rate: executionRate,
+    loading: executionLoading,
+    error: executionError,
+    updateRate: updateExecutionRate,
+  } = useExecutionRate();
   const [drafts, setDrafts] = useState({});
   const [savingSeverity, setSavingSeverity] = useState(null);
   const [savedSeverity, setSavedSeverity] = useState(null);
+  const [weekDraft, setWeekDraft] = useState("");
+  const [savingWeek, setSavingWeek] = useState(false);
+  const [savedWeek, setSavedWeek] = useState(false);
 
   useEffect(() => {
     const next = {};
@@ -15,6 +25,10 @@ export default function TarifasEditor() {
     });
     setDrafts(next);
   }, [rates]);
+
+  useEffect(() => {
+    if (executionRate) setWeekDraft(executionRate.price_per_week);
+  }, [executionRate]);
 
   const handleChange = (severity, value) => {
     setDrafts((prev) => ({ ...prev, [severity]: value }));
@@ -35,11 +49,30 @@ export default function TarifasEditor() {
     }
   };
 
-  if (loading) {
+  const handleWeekChange = (value) => {
+    setWeekDraft(value);
+    setSavedWeek(false);
+  };
+
+  const handleSaveWeek = async () => {
+    const value = parseFloat(weekDraft);
+    if (Number.isNaN(value) || value < 0) return;
+
+    setSavingWeek(true);
+    const { error: saveError } = await updateExecutionRate(value);
+    setSavingWeek(false);
+
+    if (!saveError) {
+      setSavedWeek(true);
+      setTimeout(() => setSavedWeek(false), 2000);
+    }
+  };
+
+  if (loading || executionLoading) {
     return <p className="tarifas-editor__status">Cargando tarifas…</p>;
   }
 
-  if (error) {
+  if (error || executionError) {
     return <p className="alert-error">No se pudieron cargar las tarifas.</p>;
   }
 
@@ -50,6 +83,34 @@ export default function TarifasEditor() {
         propuestas. Cambiar una tarifa aquí <strong>no afecta</strong> el
         total de propuestas que ya generaste antes.
       </p>
+
+      <div className="tarifas-editor__row">
+        <div className="tarifas-editor__info">
+          <span className="tarifas-editor__severity">S</span>
+          <span className="tarifas-editor__label">Semana de ejecución</span>
+        </div>
+
+        <div className="tarifas-editor__price">
+          <span className="tarifas-editor__prefix">$/semana</span>
+          <input
+            className="admin-input tarifas-editor__input"
+            type="number"
+            min="0"
+            step="0.01"
+            value={weekDraft}
+            onChange={(e) => handleWeekChange(e.target.value)}
+          />
+        </div>
+
+        <button
+          type="button"
+          className="admin-btn admin-btn--secondary tarifas-editor__save"
+          onClick={handleSaveWeek}
+          disabled={savingWeek}
+        >
+          {savingWeek ? "…" : savedWeek ? "Guardado ✓" : "Guardar"}
+        </button>
+      </div>
 
       {rates.map((rate) => (
         <div key={rate.severity} className="tarifas-editor__row">

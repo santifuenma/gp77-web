@@ -1,6 +1,7 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useCrackRates } from "../../../hooks/admin/useCrackRates";
+import { useExecutionRate } from "../../../hooks/admin/useExecutionRate";
 import { createProposal } from "../../../lib/proposals";
 import { generateProposalPdf } from "../../../lib/pdf/generateProposalPdf";
 import LineItemRow from "./LineItemRow";
@@ -9,13 +10,21 @@ import "./ProposalForm.css";
 let nextId = 1;
 const newItem = (severity) => ({ id: nextId++, severity: severity || "", area_m2: "" });
 
+const currency = (value) =>
+  `$${Number(value || 0).toLocaleString("es-VE", {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  })}`;
+
 export default function ProposalForm() {
   const { rates, loading: ratesLoading } = useCrackRates();
+  const { rate: executionRate, loading: executionRateLoading } = useExecutionRate();
   const navigate = useNavigate();
 
   const [clientName, setClientName] = useState("");
   const [clientAddress, setClientAddress] = useState("");
   const [items, setItems] = useState([newItem()]);
+  const [executionWeeks, setExecutionWeeks] = useState("");
   const [err, setErr] = useState("");
   const [submitting, setSubmitting] = useState(false);
 
@@ -39,7 +48,10 @@ export default function ProposalForm() {
     [items, rates]
   );
 
-  const total = itemsWithCalc.reduce((sum, item) => sum + item.subtotal, 0);
+  const itemsTotal = itemsWithCalc.reduce((sum, item) => sum + item.subtotal, 0);
+  const weekRatePrice = executionRate?.price_per_week ?? 0;
+  const executionSubtotal = (parseFloat(executionWeeks) || 0) * weekRatePrice;
+  const total = itemsTotal + executionSubtotal;
 
   const handleItemChange = (id, patch) => {
     setItems((prev) => prev.map((item) => (item.id === id ? { ...item, ...patch } : item)));
@@ -58,6 +70,9 @@ export default function ProposalForm() {
     if (!clientAddress.trim()) return "Ingresa la dirección.";
     if (itemsWithCalc.some((item) => !item.area_m2 || parseFloat(item.area_m2) <= 0)) {
       return "Cada línea necesita un área en m² mayor a 0.";
+    }
+    if (!executionWeeks || parseFloat(executionWeeks) <= 0) {
+      return "Ingresa las semanas de ejecución del proyecto.";
     }
     return "";
   };
@@ -86,6 +101,9 @@ export default function ProposalForm() {
       clientName,
       clientAddress,
       items: payloadItems,
+      executionWeeks: parseFloat(executionWeeks),
+      executionRate: weekRatePrice,
+      executionSubtotal,
     });
 
     setSubmitting(false);
@@ -101,6 +119,9 @@ export default function ProposalForm() {
       total: data.total,
       created_at: data.created_at,
       items: data.items ?? payloadItems,
+      execution_weeks: data.execution_weeks ?? parseFloat(executionWeeks),
+      execution_rate_snapshot: data.execution_rate_snapshot ?? weekRatePrice,
+      execution_subtotal: data.execution_subtotal ?? executionSubtotal,
     });
 
     navigate("/admin/propuestas", { state: { successClient: clientName } });
@@ -146,14 +167,31 @@ export default function ProposalForm() {
         + Agregar línea
       </button>
 
+      <div className="proposal-form__execution">
+        <div className="proposal-form__execution-field">
+          <label className="line-item__label">Semanas de ejecución</label>
+          <input
+            className="admin-input proposal-form__weeks"
+            type="number"
+            min="0"
+            step="1"
+            placeholder="0"
+            value={executionWeeks}
+            onChange={(e) => setExecutionWeeks(e.target.value)}
+          />
+        </div>
+
+        <div className="proposal-form__execution-subtotal">
+          <span className="line-item__label">
+            {`Subtotal (${currency(weekRatePrice)}/semana)`}
+          </span>
+          <span className="line-item__subtotal-value">{currency(executionSubtotal)}</span>
+        </div>
+      </div>
+
       <div className="proposal-form__total">
         <span>Total</span>
-        <strong>
-          {`$${total.toLocaleString("es-VE", {
-            minimumFractionDigits: 2,
-            maximumFractionDigits: 2,
-          })}`}
-        </strong>
+        <strong>{currency(total)}</strong>
       </div>
 
       {err && <p className="alert-error">{err}</p>}
@@ -161,7 +199,7 @@ export default function ProposalForm() {
       <button
         className="admin-btn admin-btn--primary proposal-form__submit"
         type="submit"
-        disabled={submitting || ratesLoading}
+        disabled={submitting || ratesLoading || executionRateLoading}
       >
         {submitting ? "Generando…" : "Generar propuesta y PDF"}
       </button>

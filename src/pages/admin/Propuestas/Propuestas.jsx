@@ -94,7 +94,7 @@ export default function Propuestas() {
       )}
 
       {showTarifas && (
-        <Modal title="Tarifas de Grietas" onClose={() => setShowTarifas(false)}>
+        <Modal title="Tarifas" onClose={() => setShowTarifas(false)}>
           <TarifasEditor />
         </Modal>
       )}
