@@ -1,12 +1,17 @@
 /* Se sale del ancho máximo de .admin-main (900px) para que el plano de
-   fondo cubra todo el viewport, no solo la columna del contenido. */
+   fondo cubra todo el viewport, no solo la columna del contenido — y
+   cancela el padding vertical de .admin-main (con márgenes negativos)
+   para que el min-height de abajo (100vh menos el header, que sí es un
+   valor fijo y conocido) sea el alto real de la página, sin sumar el
+   padding del contenedor encima y crear scroll de sobra. */
 .admin-login {
   position: relative;
   left: 50%;
   margin-left: -50vw;
+  margin-top: -20px;
+  margin-bottom: -60px;
   width: 100vw;
-  height: 100%;
-  min-height: calc(100vh - 64px);
+  min-height: calc(100vh - 52px);
   box-sizing: border-box;
   display: flex;
   align-items: center;
@@ -15,6 +20,14 @@
   background-image: url("../../assets/img/PlanoGP.jpg");
   background-size: cover;
   background-position: center;
+}
+
+@media (max-width: 600px) {
+  .admin-login {
+    margin-top: -16px;
+    margin-bottom: -50px;
+    min-height: calc(100vh - 48px);
+  }
 }
 
 .admin-login::before {
