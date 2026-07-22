@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { listProposals, getProposalWithItems } from "../../../lib/proposals";
-import { generateProposalPdf } from "../../../lib/pdf/generateProposalPdf";
+import { generateProposalPdf, shareProposalPdf } from "../../../lib/pdf/generateProposalPdf";
 import Modal from "../../../components/admin/Modal/Modal";
 import TarifasEditor from "../../../components/admin/TarifasEditor/TarifasEditor";
 import "./Propuestas.css";
@@ -18,6 +18,8 @@ export default function Propuestas() {
   const [proposals, setProposals] = useState([]);
   const [loading, setLoading] = useState(true);
   const [downloadingId, setDownloadingId] = useState(null);
+  const [sharingId, setSharingId] = useState(null);
+  const canShareFiles = typeof navigator !== "undefined" && Boolean(navigator.canShare);
   const [showTarifas, setShowTarifas] = useState(false);
   const [successClient, setSuccessClient] = useState(
     () => location.state?.successClient || null
@@ -42,6 +44,13 @@ export default function Propuestas() {
     const { data } = await getProposalWithItems(proposal.id);
     await generateProposalPdf(data || proposal);
     setDownloadingId(null);
+  };
+
+  const handleShare = async (proposal) => {
+    setSharingId(proposal.id);
+    const { data } = await getProposalWithItems(proposal.id);
+    await shareProposalPdf(data || proposal);
+    setSharingId(null);
   };
 
   return (
@@ -133,6 +142,16 @@ export default function Propuestas() {
                   >
                     Editar
                   </Link>
+                  {canShareFiles && (
+                    <button
+                      type="button"
+                      className="admin-btn admin-btn--secondary propuesta-row__download"
+                      onClick={() => handleShare(proposal)}
+                      disabled={sharingId === proposal.id}
+                    >
+                      {sharingId === proposal.id ? "…" : "Compartir"}
+                    </button>
+                  )}
                   <button
                     type="button"
                     className="admin-btn admin-btn--secondary propuesta-row__download"
