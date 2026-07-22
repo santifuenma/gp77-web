@@ -126,22 +126,24 @@ export default function Propuestas() {
           proposals.length > 0 &&
           proposals.map((proposal) => (
             <div key={proposal.id} className="propuesta-row">
-              <div className="propuesta-row__info">
-                <p className="propuesta-row__client">{proposal.client_name}</p>
-                <p className="propuesta-row__meta">
-                  {proposal.client_address} ·{" "}
-                  {new Date(proposal.created_at).toLocaleDateString("es-VE")}
-                </p>
+              <div className="propuesta-row__top">
+                <div className="propuesta-row__info">
+                  <p className="propuesta-row__client">{proposal.client_name}</p>
+                  <p className="propuesta-row__meta">
+                    {proposal.client_address} ·{" "}
+                    {new Date(proposal.created_at).toLocaleDateString("es-VE")}
+                  </p>
+                </div>
+                <Link
+                  to={`/admin/propuestas/${proposal.id}/editar`}
+                  className="admin-btn admin-btn--secondary propuesta-row__edit"
+                >
+                  Editar
+                </Link>
               </div>
               <div className="propuesta-row__right">
                 <span className="propuesta-row__total">{currency(proposal.total)}</span>
                 <div className="propuesta-row__buttons">
-                  <Link
-                    to={`/admin/propuestas/${proposal.id}/editar`}
-                    className="admin-btn admin-btn--secondary propuesta-row__download"
-                  >
-                    Editar
-                  </Link>
                   {canShareFiles && (
                     <button
                       type="button"
