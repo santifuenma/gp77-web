@@ -4,6 +4,12 @@
   gap: 18px;
 }
 
+.proposal-form__status {
+  font-family: var(--font-primary);
+  font-size: var(--admin-fs-base);
+  color: var(--color-text-soft);
+}
+
 .proposal-form__client {
   display: grid;
   grid-template-columns: 1fr;

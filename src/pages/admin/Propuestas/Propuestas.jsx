@@ -22,6 +22,7 @@ export default function Propuestas() {
   const [successClient, setSuccessClient] = useState(
     () => location.state?.successClient || null
   );
+  const successAction = location.state?.successAction || "generada";
 
   useEffect(() => {
     listProposals().then(({ data }) => {
@@ -81,7 +82,7 @@ export default function Propuestas() {
 
       {successClient && (
         <p className="alert-success propuestas-page__banner">
-          Propuesta para <strong>{successClient}</strong> generada correctamente. El PDF se descargó a tu carpeta de descargas.
+          Propuesta para <strong>{successClient}</strong> {successAction} correctamente. El PDF se descargó a tu carpeta de descargas.
           <button
             type="button"
             className="propuestas-page__banner-close"
@@ -125,14 +126,22 @@ export default function Propuestas() {
               </div>
               <div className="propuesta-row__right">
                 <span className="propuesta-row__total">{currency(proposal.total)}</span>
-                <button
-                  type="button"
-                  className="admin-btn admin-btn--secondary propuesta-row__download"
-                  onClick={() => handleDownload(proposal)}
-                  disabled={downloadingId === proposal.id}
-                >
-                  {downloadingId === proposal.id ? "…" : "PDF"}
-                </button>
+                <div className="propuesta-row__buttons">
+                  <Link
+                    to={`/admin/propuestas/${proposal.id}/editar`}
+                    className="admin-btn admin-btn--secondary propuesta-row__download"
+                  >
+                    Editar
+                  </Link>
+                  <button
+                    type="button"
+                    className="admin-btn admin-btn--secondary propuesta-row__download"
+                    onClick={() => handleDownload(proposal)}
+                    disabled={downloadingId === proposal.id}
+                  >
+                    {downloadingId === proposal.id ? "…" : "PDF"}
+                  </button>
+                </div>
               </div>
             </div>
           ))}

@@ -2,7 +2,7 @@ import React, { useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useCrackRates } from "../../../hooks/admin/useCrackRates";
 import { useExecutionRate } from "../../../hooks/admin/useExecutionRate";
-import { createProposal } from "../../../lib/proposals";
+import { createProposal, updateProposal, getProposalWithItems } from "../../../lib/proposals";
 import { generateProposalPdf } from "../../../lib/pdf/generateProposalPdf";
 import LineItemRow from "./LineItemRow";
 import "./ProposalForm.css";
@@ -16,7 +16,8 @@ const currency = (value) =>
     maximumFractionDigits: 2,
   })}`;
 
-export default function ProposalForm() {
+export default function ProposalForm({ proposalId }) {
+  const isEditing = Boolean(proposalId);
   const { rates, loading: ratesLoading } = useCrackRates();
   const { rate: executionRate, loading: executionRateLoading } = useExecutionRate();
   const navigate = useNavigate();
@@ -27,6 +28,38 @@ export default function ProposalForm() {
   const [executionWeeks, setExecutionWeeks] = useState("");
   const [err, setErr] = useState("");
   const [submitting, setSubmitting] = useState(false);
+  const [loadingProposal, setLoadingProposal] = useState(isEditing);
+
+  // Al editar, precarga los datos de la propuesta ya guardada.
+  useEffect(() => {
+    if (!isEditing) return;
+
+    let active = true;
+    getProposalWithItems(proposalId).then(({ data, error: fetchError }) => {
+      if (!active) return;
+      if (fetchError || !data) {
+        setErr("No se pudo cargar la propuesta.");
+        setLoadingProposal(false);
+        return;
+      }
+
+      setClientName(data.client_name || "");
+      setClientAddress(data.client_address || "");
+      setItems(
+        (data.items && data.items.length > 0 ? data.items : [{}]).map((item) => ({
+          id: nextId++,
+          severity: item.severity || "",
+          area_m2: item.area_m2 != null ? String(item.area_m2) : "",
+        }))
+      );
+      setExecutionWeeks(data.execution_weeks != null ? String(data.execution_weeks) : "");
+      setLoadingProposal(false);
+    });
+
+    return () => {
+      active = false;
+    };
+  }, [isEditing, proposalId]);
 
   // Una vez llegan las tarifas (pueden tardar si vienen de Supabase),
   // asigna la primera severidad por defecto a las líneas que aún no tienen.
@@ -97,7 +130,9 @@ export default function ProposalForm() {
       label: item.rate?.label,
     }));
 
-    const { data, error } = await createProposal({
+    const submitFn = isEditing ? updateProposal : createProposal;
+    const { data, error } = await submitFn({
+      id: proposalId,
       clientName,
       clientAddress,
       items: payloadItems,
@@ -124,8 +159,14 @@ export default function ProposalForm() {
       execution_subtotal: data.execution_subtotal ?? executionSubtotal,
     });
 
-    navigate("/admin/propuestas", { state: { successClient: clientName } });
+    navigate("/admin/propuestas", {
+      state: { successClient: clientName, successAction: isEditing ? "actualizada" : "generada" },
+    });
   };
+
+  if (loadingProposal) {
+    return <p className="admin-panel proposal-form__status">Cargando propuesta…</p>;
+  }
 
   return (
     <form className="admin-panel proposal-form" onSubmit={onSubmit}>
@@ -201,7 +242,13 @@ export default function ProposalForm() {
         type="submit"
         disabled={submitting || ratesLoading || executionRateLoading}
       >
-        {submitting ? "Generando…" : "Generar propuesta y PDF"}
+        {submitting
+          ? isEditing
+            ? "Guardando…"
+            : "Generando…"
+          : isEditing
+          ? "Guardar cambios y PDF"
+          : "Generar propuesta y PDF"}
       </button>
     </form>
   );

@@ -43,6 +43,49 @@ export async function createProposal({
   return { data, error };
 }
 
+export async function updateProposal({
+  id,
+  clientName,
+  clientAddress,
+  items,
+  executionWeeks = 0,
+  executionRate = 0,
+  executionSubtotal = 0,
+}) {
+  if (!isSupabaseConfigured) {
+    const itemsTotal = items.reduce((sum, item) => sum + item.subtotal, 0);
+    let updated = null;
+    mockProposals = mockProposals.map((proposal) => {
+      if (proposal.id !== id) return proposal;
+      updated = {
+        ...proposal,
+        client_name: clientName,
+        client_address: clientAddress,
+        total: itemsTotal + executionSubtotal,
+        execution_weeks: executionWeeks,
+        execution_rate_snapshot: executionRate,
+        execution_subtotal: executionSubtotal,
+        items,
+      };
+      return updated;
+    });
+    return { data: updated, error: updated ? null : new Error("Propuesta no encontrada") };
+  }
+
+  const { data, error } = await supabase.rpc("update_proposal", {
+    p_proposal_id: id,
+    p_client_name: clientName,
+    p_client_address: clientAddress,
+    p_items: items.map((item) => ({
+      severity: item.severity,
+      area_m2: item.area_m2,
+    })),
+    p_execution_weeks: executionWeeks,
+  });
+
+  return { data, error };
+}
+
 export async function listProposals() {
   if (!isSupabaseConfigured) {
     return { data: mockProposals, error: null };
