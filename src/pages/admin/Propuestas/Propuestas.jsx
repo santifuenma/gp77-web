@@ -136,7 +136,7 @@ export default function Propuestas() {
                 </div>
                 <Link
                   to={`/admin/propuestas/${proposal.id}/editar`}
-                  className="admin-btn admin-btn--secondary propuesta-row__edit"
+                  className="admin-btn admin-btn--secondary propuesta-row__edit propuesta-row__edit--mobile"
                 >
                   Editar
                 </Link>
@@ -144,10 +144,16 @@ export default function Propuestas() {
               <div className="propuesta-row__right">
                 <span className="propuesta-row__total">{currency(proposal.total)}</span>
                 <div className="propuesta-row__buttons">
+                  <Link
+                    to={`/admin/propuestas/${proposal.id}/editar`}
+                    className="admin-btn admin-btn--secondary propuesta-row__download propuesta-row__edit--desktop"
+                  >
+                    Editar
+                  </Link>
                   {canShareFiles && (
                     <button
                       type="button"
-                      className="admin-btn admin-btn--secondary propuesta-row__download"
+                      className="admin-btn admin-btn--secondary propuesta-row__download propuesta-row__share"
                       onClick={() => handleShare(proposal)}
                       disabled={sharingId === proposal.id}
                     >
