@@ -1,14 +1,36 @@
+/* Se sale del ancho máximo de .admin-main (900px) para que el plano de
+   fondo cubra todo el viewport, no solo la columna del contenido. */
 .admin-login {
+  position: relative;
+  left: 50%;
+  margin-left: -50vw;
+  width: 100vw;
+  height: 100%;
+  min-height: calc(100vh - 64px);
+  box-sizing: border-box;
   display: flex;
+  align-items: center;
   justify-content: center;
-  align-items: flex-start;
-  padding-top: 48px;
+  padding: 24px 16px;
+  background-image: url("../../assets/img/PlanoGP.jpg");
+  background-size: cover;
+  background-position: center;
+}
+
+.admin-login::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(241, 241, 241, 0.94);
 }
 
 .admin-login__card {
+  position: relative;
+  z-index: 1;
+  box-sizing: border-box;
   width: 100%;
-  max-width: 360px;
-  padding: 28px;
+  max-width: 320px;
+  padding: 48px 32px 40px;
   text-align: center;
   background: var(--color-surface);
   border: var(--admin-border-thin) solid var(--color-border);
@@ -25,17 +47,17 @@
 
 .admin-login__lead {
   text-align: center;
-  margin: 0 0 20px 0;
+  margin: 0 0 28px 0;
   max-width: none;
 }
 
 .admin-login__form {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 14px;
 }
 
 .admin-login__submit {
-  margin-top: 6px;
+  margin-top: 10px;
   width: 100%;
 }
