@@ -18,6 +18,7 @@ on conflict (id) do nothing;
 
 alter table execution_rate enable row level security;
 
+drop policy if exists "authenticated full access" on execution_rate;
 create policy "authenticated full access" on execution_rate
   for all to authenticated using (true) with check (true);
 

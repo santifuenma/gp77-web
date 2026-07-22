@@ -60,12 +60,15 @@ alter table crack_rates enable row level security;
 alter table proposals enable row level security;
 alter table proposal_items enable row level security;
 
+drop policy if exists "authenticated full access" on crack_rates;
 create policy "authenticated full access" on crack_rates
   for all to authenticated using (true) with check (true);
 
+drop policy if exists "authenticated full access" on proposals;
 create policy "authenticated full access" on proposals
   for all to authenticated using (true) with check (true);
 
+drop policy if exists "authenticated full access" on proposal_items;
 create policy "authenticated full access" on proposal_items
   for all to authenticated using (true) with check (true);
 
